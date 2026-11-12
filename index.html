@@ -25,9 +25,9 @@
   <meta charset="UTF-8">
   <!-- Hace que la página se vea bien en celulares -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alex Verboonen Cabrera · Cloud Architect & Systems Engineer</title>
+  <title>Alex Verboonen Cabrera · Systems Engineer & DevOps</title>
   <!-- Descripción que muestran Google y las redes al compartir el enlace -->
-  <meta name="description" content="Currículum de Alex Verboonen Cabrera: Professional Cloud Architect y Systems Engineer con más de 10 años de experiencia en infraestructura, Linux, Kubernetes y automatización.">
+  <meta name="description" content="Currículum de Alex Verboonen Cabrera: Systems Engineer y DevOps con más de 10 años de experiencia en infraestructura, Linux, Kubernetes, Terraform y cloud.">
 
   <style>
     /* ---------- 1. VARIABLES DE DISEÑO (cámbialas a tu gusto) ---------- */
@@ -210,7 +210,7 @@
     /* ---------- 7. IMPRESIÓN / PDF: una columna, apto para ATS ---------- */
     @media print {
       @page { margin: 10mm 14mm; }
-      body { background: #fff; padding: 0; font-size: 9.5pt; line-height: 1.4; }
+      body { background: #fff; padding: 0; font-size: 9.5pt; line-height: 1.35; }
       .solo-imprimir { display: block; margin: -12px 0 10px; color: var(--color-suave); }
       .principal h1 { font-size: 22pt; }
       .titular { margin: 2px 0 14px; font-size: 12pt; }
@@ -254,6 +254,10 @@
       .principal h2 { margin: 16px 0 10px; font-size: 12pt; }
       .lateral h2 { margin: 16px 0 8px; }
       .lateral h3 { margin: 6px 0 2px; font-size: 9.5pt; }
+      /* En el PDF, educación y certificaciones van en una sola línea cada una */
+      .lateral li br { display: none; }
+      .lateral li small::before { content: " · "; }
+      .lateral li small { font-size: 9pt; color: var(--color-suave); }
     }
   </style>
 </head>
@@ -266,18 +270,18 @@
     <section class="principal">
 
       <h1>Alex Verboonen Cabrera</h1>
-      <p class="titular">Professional Cloud Architect · Systems Engineer</p>
+      <p class="titular">Systems Engineer · DevOps · Google Cloud Architect</p>
       <!-- Línea de contacto que solo aparece en el PDF, justo debajo de tu nombre (si agregas tu correo, ponlo aquí también) -->
       <p class="solo-imprimir">Querétaro, México · linkedin.com/in/alex-verboonen</p>
 
       <!-- PERFIL: 3 a 5 líneas, como recomiendan las guías actuales -->
       <p>
-        Ingeniero en sistemas con más de 10 años de experiencia en infraestructura
-        tecnológica para empresas globales como Tata Consultancy Services, EPAM Systems
-        y Grupo Santander. Especializado en servidores Linux, Unix y Windows,
-        contenedores con Kubernetes y Docker, y automatización con Ansible y Jenkins.
-        Desde 2021 trabajo en inglés en equipos multinacionales y distribuidos.
-        Arquitecto cloud certificado, hoy ampliando mi perfil hacia ciencia de datos e inteligencia artificial.
+        Ingeniero de sistemas y DevOps con más de 10 años de experiencia en infraestructura
+        para empresas globales como Tata Consultancy Services, EPAM Systems y Grupo Santander.
+        Especializado en Linux, Kubernetes, Docker, infraestructura como código (Terraform, Ansible),
+        CI/CD y monitoreo, con experiencia en GCP, Azure y AWS. Desde 2021 trabajo en inglés en equipos
+        multinacionales y distribuidos. Google Professional Cloud Architect y HashiCorp Terraform Associate;
+        actualmente cursando la Maestría en Inteligencia Artificial Aplicada en el Tec de Monterrey.
       </p>
 
       <!-- Botón para imprimir o guardar como PDF (no aparece en el PDF) -->
@@ -298,64 +302,60 @@
       -->
 
       <article class="puesto">
-        <h3>Systems Engineer</h3>
+        <h3>Systems Engineer · asignado a LSEG</h3>
         <p class="meta"><span class="empresa">Tata Consultancy Services</span> · oct. 2023 – actualidad · Querétaro (remoto)</p>
         <ul>
-          <!-- ✍️ Agrega 1–2 logros XYZ de tu trabajo actual (cliente, tecnologías, resultados) -->
-          <li>Ingeniería y operación de infraestructura para clientes empresariales, en modalidad 100% remota.</li>
-          <li>Colaboración diaria en inglés con equipos globales: comunicación con clientes, liderazgo, documentación y capacitación técnica.</li>
+          <!-- ✍️ Si tienes cifras (alertas reducidas, tiempo de respuesta, nº de servidores), agrégalas aquí -->
+          <li>Construí desde cero la plataforma de monitoreo Zabbix (de Docker a RHEL) e integré sus alertas con BigPanda.</li>
+          <li>Guardias 24/7 y soporte L2 para plataformas críticas de London Stock Exchange Group; participación en salas de crisis para incidentes P1/P2.</li>
+          <li>Diagnóstico a nivel aplicación y sistema operativo en cuatro aplicaciones principales, incluido un servicio en AWS.</li>
+          <li>Soporte a clústeres de Elasticsearch y mantenimiento preventivo: reinicios, verificaciones previas y posteriores, y validación de hardware.</li>
+          <li>Colaboración diaria en inglés con equipos globales; gestión de tickets en Jira.</li>
         </ul>
+        <div class="tec"><span>Zabbix</span><span>BigPanda</span><span>RHEL</span><span>Docker</span><span>Elasticsearch</span><span>AWS</span><span>Jira</span></div>
       </article>
 
       <article class="puesto">
         <h3>Systems Engineer</h3>
         <p class="meta"><span class="empresa">EPAM Systems</span> · ene. 2022 – jul. 2023</p>
         <ul>
-          <!-- ✍️ Agrega un logro XYZ -->
-          <li>Administración y despliegue de aplicaciones en contenedores.</li>
+          <li>Soporte L2 en esquema 20×7 con cuatro turnos: monitoreo de incidencias y solicitudes de clientes.</li>
+          <li>Reporte, seguimiento y análisis de bugs a lo largo del tiempo, asegurando el cumplimiento de SLA.</li>
+          <li>Formación SRE (Jenkins, Terraform, Docker, Kubernetes y AWS) que culminó en las certificaciones Google Professional Cloud Architect y HashiCorp Terraform Associate.</li>
           <li>Trabajo en equipos multinacionales con comunicación, cursos y gestión 100% en inglés.</li>
         </ul>
-        <div class="tec"><span>Kubernetes</span><span>Docker</span></div>
+        <div class="tec"><span>Kubernetes</span><span>Docker</span><span>Terraform</span><span>Jenkins</span><span>GCP</span><span>AWS</span></div>
       </article>
 
       <article class="puesto">
-        <h3>TechOps · Technology Specialist</h3>
-        <p class="meta"><span class="empresa">VMLY&amp;R</span> · abr. 2021 – abr. 2022</p>
+        <h3>DevOps · TechOps Technology Specialist</h3>
+        <p class="meta"><span class="empresa">VMLY&amp;R</span> · abr. 2021 – ene. 2022</p>
         <ul>
-          <!-- ✍️ Agrega un logro XYZ -->
-          <li>Operación tecnológica y soporte de plataformas sobre Kubernetes.</li>
+          <li>Rol DevOps para clientes como Ford, Lincoln, Plante Moran y General Dynamics.</li>
+          <li>Gestión de infraestructura y micrositios en Rackspace y Azure como infraestructura como código.</li>
+          <li>Implementación de pipelines CI/CD con Jenkins para servidores Apache; gestión de releases, respaldos y recuperación ante desastres.</li>
           <li>Primer rol con comunicación profesional en inglés, coordinándome con equipos internacionales.</li>
         </ul>
-        <div class="tec"><span>Kubernetes</span></div>
+        <div class="tec"><span>Azure</span><span>Rackspace</span><span>Jenkins</span><span>Apache</span><span>Git</span><span>Kubernetes</span></div>
       </article>
 
       <article class="puesto">
-        <h3>Automator Jr.</h3>
-        <p class="meta"><span class="empresa">Santander Global Tech</span> · jul. 2019 – mar. 2021 · Querétaro</p>
-        <ul>
-          <li>Implementación de playbooks y roles de Ansible para los servidores de distintos proyectos de la empresa.</li>
-          <li>Mantenimiento de pipelines de despliegue y configuración de servidores Linux y Windows.</li>
-        </ul>
-        <div class="tec"><span>Ansible</span><span>Ansible Tower</span><span>Jenkins</span></div>
-      </article>
-
-      <article class="puesto">
-        <h3>Especialista en TI · Administrador de sistemas</h3>
+        <h3>Automator Jr. · Administrador de sistemas</h3>
         <p class="meta"><span class="empresa">Santander Global Tech / Produban México</span> · ago. 2017 – mar. 2021 · Querétaro</p>
         <ul>
-          <li>Administración de servidores en entornos de desarrollo, preproducción y producción para México, Estados Unidos, Uruguay, Puerto Rico, Colombia y Perú, entre otros.</li>
-          <li>Atención de incidentes en todos los entornos (DES, PRE, PRO), con guardias y turnos según la operación y apegado a la normativa de seguridad.</li>
-          <li>Soporte técnico de segundo nivel y participación en proyectos tecnológicos y de servicio.</li>
+          <li>Implementación de playbooks y roles con Ansible y Jenkins para los servidores de distintos proyectos del grupo.</li>
+          <li>Administración de servidores RHEL, AIX y Windows Server en entornos de desarrollo, preproducción y producción para México, Estados Unidos, Uruguay, Puerto Rico, Colombia y Perú.</li>
+          <li>Soporte L2 y atención de incidentes en todos los entornos mediante ServiceNow, con guardias según la operación.</li>
+          <li>Analista de Server Factory y arquitectura; soporte a plataformas VMware y OpenStack.</li>
         </ul>
-        <div class="tec"><span>RHEL 5/6/7</span><span>AIX</span><span>Windows Server 2012/2016</span><span>VMware</span><span>OpenStack</span></div>
+        <div class="tec"><span>Ansible</span><span>Jenkins</span><span>RHEL</span><span>AIX</span><span>Windows Server</span><span>VMware</span><span>OpenStack</span><span>ServiceNow</span></div>
       </article>
 
       <article class="puesto">
         <h3>Desarrollador de software</h3>
         <p class="meta"><span class="empresa">Grupo Arquimo</span> · jul. 2016 – ago. 2017 · Morelia</p>
         <ul>
-          <li>Desarrollo web para proyectos de negocio relacionados con actividades financieras.</li>
-          <li>Apoyo en arquitectura de sitios web y soporte a sistemas financieros.</li>
+          <li>Desarrollo web para proyectos de negocio relacionados con actividades financieras y soporte a sistemas financieros.</li>
         </ul>
       </article>
 
@@ -409,29 +409,40 @@
 
       <h2>Habilidades</h2>
       <!-- Agrupadas por categoría. Para agregar una, copia una línea <span> -->
-      <h3>Cloud y contenedores</h3>
+      <h3>Cloud</h3>
       <div class="etiquetas">
-        <span class="etiqueta">Arquitectura cloud</span>
-        <span class="etiqueta">Kubernetes</span>
-        <span class="etiqueta">Docker</span>
+        <span class="etiqueta">Google Cloud (GCP)</span>
+        <span class="etiqueta">Azure</span>
+        <span class="etiqueta">AWS</span>
         <span class="etiqueta">VMware</span>
         <span class="etiqueta">OpenStack</span>
+      </div>
+      <h3>Contenedores e IaC</h3>
+      <div class="etiquetas">
+        <span class="etiqueta">Kubernetes</span>
+        <span class="etiqueta">Docker</span>
+        <span class="etiqueta">Terraform</span>
+        <span class="etiqueta">Ansible</span>
+      </div>
+      <h3>CI/CD y operación</h3>
+      <div class="etiquetas">
+        <span class="etiqueta">Jenkins</span>
+        <span class="etiqueta">Git</span>
+        <span class="etiqueta">Zabbix</span>
+        <span class="etiqueta">Elasticsearch</span>
+        <span class="etiqueta">Jira</span>
+        <span class="etiqueta">ServiceNow</span>
       </div>
       <h3>Sistemas operativos</h3>
       <div class="etiquetas">
         <span class="etiqueta">Linux (RHEL)</span>
         <span class="etiqueta">Unix (AIX)</span>
         <span class="etiqueta">Windows Server</span>
-      </div>
-      <h3>Automatización y DevOps</h3>
-      <div class="etiquetas">
-        <span class="etiqueta">Ansible / Tower</span>
-        <span class="etiqueta">Jenkins</span>
-        <span class="etiqueta">CI/CD</span>
-        <span class="etiqueta">DevOps</span>
+        <span class="etiqueta">Apache</span>
       </div>
       <h3>Datos e IA</h3>
       <div class="etiquetas">
+        <span class="etiqueta">Python</span>
         <span class="etiqueta">Ciencia de datos</span>
         <span class="etiqueta">Visualización de datos</span>
         <span class="etiqueta">Machine Learning</span>
@@ -448,23 +459,24 @@
       <h2>Educación</h2>
       <ul>
         <li>
-          <!-- ✍️ Ajusta el nombre exacto de tu programa en el Tec -->
-          <strong>Estudios en Inteligencia Artificial y ciencia de datos</strong><br>
+          <strong>Maestría en Inteligencia Artificial Aplicada</strong><br>
           Tecnológico de Monterrey<br>
           <small>En curso</small>
         </li>
         <li>
           <strong>Ingeniería en Tecnologías de la Información y Comunicaciones</strong><br>
           Instituto Tecnológico de Morelia<br>
-          <small>2012 – 2017 · Administración de sistemas y seguridad de la información</small>
+          <small>2012 – 2017 · Titulación por EGEL-CENEVAL con Desempeño Sobresaliente</small>
         </li>
       </ul>
 
       <h2>Certificaciones</h2>
       <ul>
+        <li>Google Professional Cloud Architect<br><small>Google · 2023</small></li>
+        <li>HashiCorp Certified: Terraform Associate<br><small>HashiCorp · 2023</small></li>
         <li>Certificado de Alta Especialidad: Visualización de datos<br><small>Tecnológico de Monterrey · 2026</small></li>
         <li>Enterprise Data Science in Practice<br><small>IBM · 2026</small></li>
-        <li>Professional Cloud Architect</li>
+        <li>Scrum Fundamentals Certified<br><small>SCRUMstudy · 2019</small></li>
         <!-- Tienes 15 en LinkedIn: agrega aquí las que quieras destacar -->
       </ul>
     </aside>
