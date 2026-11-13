@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+   CURRÍCULUM WEB DE ALEX VERBOONEN CABRERA
+  ============================================================
+   Cómo está organizado este archivo:
+     1. <head>   → datos de la página (título, idioma) y los ESTILOS (CSS).
+     2. <body>   → el CONTENIDO que se ve (tu nombre, experiencia, etc.).
+
+   Para cambiar TEXTOS: busca la sección en <body> y edita lo que
+   está entre las etiquetas, por ejemplo <h3>Systems Engineer</h3>.
+
+   Para cambiar COLORES: modifica las variables de :root (abajo).
+   Todo el sitio usa esas variables, así que cambias un valor
+   y se actualiza en todos lados.
+
+   DOS VERSIONES EN UN MISMO ARCHIVO:
+     • En pantalla: diseño a dos columnas, pensado para personas.
+     • Al imprimir / guardar como PDF: una sola columna, sin colores
+       de fondo, pensado para los sistemas ATS de las empresas.
+  ============================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Hace que la página se vea bien en celulares -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alex Verboonen Cabrera · Systems Engineer & DevOps</title>
+  <!-- Descripción que muestran Google y las redes al compartir el enlace -->
+  <meta name="description" content="Resume of Alex Verboonen Cabrera: Systems Engineer and DevOps professional with 10+ years of experience in infrastructure, Linux, Kubernetes, Terraform and cloud.">
+
+  <style>
+    /* ---------- 1. VARIABLES DE DISEÑO (cámbialas a tu gusto) ---------- */
+    :root {
+      --color-fondo:      #f5f6f8;   /* fondo general de la página */
+      --color-tarjeta:    #ffffff;   /* fondo del área principal */
+      --color-lateral:    #14213d;   /* fondo de la columna izquierda */
+      --color-acento:     #2a9d8f;   /* color de resaltado (líneas, etiquetas) */
+      --color-texto:      #1f2933;   /* texto principal */
+      --color-suave:      #5f6b7a;   /* texto secundario (fechas, lugares) */
+      --fuente: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+    }
+
+    /* ---------- 2. ESTILOS BASE ---------- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--fuente);
+      background: var(--color-fondo);
+      color: var(--color-texto);
+      line-height: 1.6;
+      padding: 40px 16px;
+    }
+
+    a { color: var(--color-acento); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ---------- 3. ESTRUCTURA: dos columnas ---------- */
+    /*
+      Truco importante: en el HTML la columna PRINCIPAL va primero
+      (así la leen bien los ATS y los lectores de pantalla), pero con
+      "order" la columna lateral se dibuja a la izquierda en pantalla.
+    */
+    .cv {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 300px 1fr;  /* columna izquierda fija, derecha flexible */
+      background: var(--color-tarjeta);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(20, 33, 61, 0.12);
+    }
+    .lateral   { order: 1; }
+    .principal { order: 2; }
+
+    /* ---------- 4. COLUMNA IZQUIERDA ---------- */
+    .lateral {
+      background: var(--color-lateral);
+      color: #e8ecf2;
+      padding: 40px 28px;
+    }
+
+    /* Círculo con tus iniciales. Si quieres tu foto, mira el comentario en el HTML */
+    .avatar {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: var(--color-acento);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 42px; font-weight: 700; color: #fff;
+      margin: 0 auto 8px;
+      object-fit: cover;
+    }
+
+    .lateral h2 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--color-acento);
+      margin: 32px 0 12px;
+    }
+    .lateral h3 {
+      font-size: 12px;
+      font-weight: 600;
+      color: #aab4c3;
+      margin: 14px 0 6px;
+    }
+
+    .lateral ul { list-style: none; }
+    .lateral li { margin-bottom: 8px; font-size: 14px; }
+    .lateral a { color: #e8ecf2; }
+
+    /* Etiquetas de habilidades */
+    .etiquetas { display: flex; flex-wrap: wrap; gap: 6px; }
+    .etiqueta {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* ---------- 5. COLUMNA DERECHA ---------- */
+    .principal { padding: 40px 44px; }
+
+    .principal h1 { font-size: 34px; line-height: 1.2; }
+    .titular {
+      font-size: 17px;
+      color: var(--color-acento);
+      font-weight: 600;
+      margin: 6px 0 20px;
+    }
+
+    .principal h2 {
+      font-size: 20px;
+      margin: 36px 0 18px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--color-acento);
+    }
+
+    /* Cada trabajo de la experiencia y cada proyecto */
+    .puesto {
+      position: relative;
+      padding-left: 22px;
+      margin-bottom: 26px;
+      border-left: 2px solid #e1e5ea;
+    }
+    /* Puntito de la línea de tiempo */
+    .puesto::before {
+      content: "";
+      position: absolute;
+      left: -7px; top: 6px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--color-acento);
+    }
+    .puesto h3 { font-size: 17px; }
+    .empresa { font-weight: 600; }
+    .meta { font-size: 14px; color: var(--color-suave); margin-bottom: 6px; }
+    .puesto ul { padding-left: 18px; font-size: 15px; }
+    .puesto li { margin-bottom: 4px; }
+    .puesto p  { font-size: 15px; }
+
+    /* Etiquetas de tecnologías dentro de un puesto */
+    .tec { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .tec span {
+      font-size: 12px;
+      padding: 2px 9px;
+      border-radius: 4px;
+      background: #e6f4f2;
+      color: #1d6b62;
+    }
+
+    /* Tarjetas de proyectos: cuadrícula de 2 */
+    .proyectos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .proyecto {
+      border: 1px solid #e1e5ea;
+      border-radius: 10px;
+      padding: 16px 18px;
+      font-size: 15px;
+    }
+    .proyecto h3 { font-size: 16px; margin-bottom: 4px; }
+
+    /* Botón de imprimir / guardar PDF */
+    .boton {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 8px 16px;
+      border-radius: 6px;
+      background: var(--color-acento);
+      color: #fff;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .solo-imprimir { display: none; }
+    .idioma { font-size: 14px; margin: -12px 0 16px; }
+
+    /* ---------- 6. CELULARES: una sola columna ---------- */
+    @media (max-width: 760px) {
+      body { padding: 0; }
+      .cv { grid-template-columns: 1fr; border-radius: 0; }
+      .principal { padding: 32px 22px; }
+    }
+
+    /* ---------- 7. IMPRESIÓN / PDF: una columna, apto para ATS ---------- */
+    @media print {
+      @page { margin: 10mm 14mm; }
+      body { background: #fff; padding: 0; font-size: 9.5pt; line-height: 1.35; }
+      .solo-imprimir { display: block; margin: -12px 0 10px; color: var(--color-suave); }
+      .principal h1 { font-size: 22pt; }
+      .titular { margin: 2px 0 14px; font-size: 12pt; }
+      .puesto { margin-bottom: 9px; }
+      .puesto ul, .puesto p, .proyecto { font-size: 9.5pt; }
+      .meta { font-size: 9pt; margin-bottom: 2px; }
+      .lateral li { font-size: 9.5pt; margin-bottom: 2px; }
+      .cv {
+        display: block;          /* una sola columna, en el orden del HTML */
+        box-shadow: none;
+        border-radius: 0;
+      }
+      .principal { padding: 0; }
+      .lateral {
+        background: #fff;        /* sin fondo oscuro: ahorra tinta y lo lee mejor el ATS */
+        color: var(--color-texto);
+        padding: 0;
+      }
+      .lateral a { color: var(--color-texto); }
+      .lateral h2 {
+        font-size: 12pt;
+        text-transform: none;
+        letter-spacing: 0;
+        color: var(--color-texto);
+        border-bottom: 2px solid var(--color-acento);
+        padding-bottom: 4px;
+        margin: 20px 0 10px;
+      }
+      .lateral h3 { color: var(--color-texto); }
+      /* En el PDF las habilidades salen como texto separado por comas */
+      .etiquetas { display: block; }
+      .etiqueta { border: none; background: none; padding: 0; font-size: 9.5pt; }
+      .etiqueta:not(:last-child)::after { content: ","; }
+      .tec span { background: none; padding: 0; color: var(--color-suave); }
+      .tec span:not(:last-child)::after { content: " ·"; }
+      .proyectos { display: block; }
+      .proyecto { border: none; padding: 0; margin-bottom: 12px; }
+      .puesto { border-left: none; padding-left: 0; break-inside: avoid; }
+      .puesto::before { display: none; }
+      .no-imprimir, .avatar { display: none; }
+      .principal h2 { margin: 16px 0 10px; font-size: 12pt; }
+      .lateral h2 { margin: 16px 0 8px; }
+      .lateral h3 { margin: 6px 0 2px; font-size: 9.5pt; }
+      /* En el PDF, educación y certificaciones van en una sola línea cada una */
+      .lateral li br { display: none; }
+      .lateral li small::before { content: " · "; }
+      .lateral li small { font-size: 9pt; color: var(--color-suave); }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="cv">
+
+    <!-- ===================== COLUMNA PRINCIPAL ===================== -->
+    <!-- Va primero en el HTML para que los ATS lean tu nombre y experiencia antes que nada -->
+    <section class="principal">
+
+      <h1>Alex Verboonen Cabrera</h1>
+      <p class="titular">Systems Engineer · DevOps · Google Cloud Architect</p>
+      <!-- Enlace a la versión en español (no sale en el PDF) -->
+      <p class="no-imprimir idioma"><a href="/">Español</a> · <strong>English</strong></p>
+      <!-- Línea de contacto que solo aparece en el PDF, justo debajo de tu nombre (si agregas tu correo, ponlo aquí también) -->
+      <p class="solo-imprimir">Querétaro, Mexico · linkedin.com/in/alex-verboonen</p>
+
+      <!-- PERFIL: 3 a 5 líneas, como recomiendan las guías actuales -->
+      <p>
+        Systems Engineer and DevOps professional with 10+ years of infrastructure experience at global
+        companies such as Tata Consultancy Services, EPAM Systems and Santander Group. Specialized in Linux,
+        Kubernetes, Docker, infrastructure as code (Terraform, Ansible), CI/CD and monitoring, with hands-on
+        experience in GCP, Azure and AWS. Working with multinational, distributed teams since 2017.
+        Google Professional Cloud Architect and HashiCorp Terraform Associate; currently pursuing a
+        Master's in Applied Artificial Intelligence at Tecnológico de Monterrey.
+      </p>
+
+      <!-- Botón para imprimir o guardar como PDF (no aparece en el PDF) -->
+      <button class="boton no-imprimir" onclick="window.print()">⬇ Download PDF résumé</button>
+
+      <h2>Experience</h2>
+
+      <!--
+        Cada trabajo es un bloque <article class="puesto">.
+        Para agregar uno nuevo, copia un bloque completo (desde <article> hasta </article>)
+        y cambia los datos. El orden es del más reciente al más antiguo.
+
+        ✍️ FÓRMULA XYZ PARA TUS LOGROS:  "Logré [X], medido por [Y], haciendo [Z]"
+           Ejemplo: "Reduje 40% el tiempo de aprovisionamiento de servidores
+                     automatizando la configuración con playbooks de Ansible."
+           Si no tienes el número exacto, usa escala o rangos honestos:
+           "+200 servidores", "5 países", "despliegues semanales".
+      -->
+
+      <article class="puesto">
+        <h3>Systems Engineer · assigned to LSEG</h3>
+        <p class="meta"><span class="empresa">Tata Consultancy Services</span> · Oct 2023 – Present · Querétaro (remote)</p>
+        <ul>
+          <!-- ✍️ Si tienes cifras (alertas reducidas, tiempo de respuesta, nº de servidores), agrégalas aquí -->
+          <li>Built a Zabbix monitoring platform from scratch (Docker → RHEL) and integrated its alerts with BigPanda.</li>
+          <li>24/7 L2 support model for critical London Stock Exchange Group platforms; joined technical recovery calls for P1/P2 incidents.</li>
+          <li>Troubleshot four core applications, including an AWS service, at both application and OS level.</li>
+          <li>Supported Elasticsearch clusters and ran preventive maintenance: reboots, pre/post checks and hardware validations.</li>
+          <li>Daily collaboration in English with global teams; ticket management in Jira.</li>
+        </ul>
+        <div class="tec"><span>Zabbix</span><span>BigPanda</span><span>RHEL</span><span>Docker</span><span>Elasticsearch</span><span>AWS</span><span>Jira</span></div>
+      </article>
+
+      <article class="puesto">
+        <h3>Systems Engineer</h3>
+        <p class="meta"><span class="empresa">EPAM Systems</span> · Jan 2022 – Jul 2023</p>
+        <ul>
+          <li>L2 support in a 20×7, four-shift rotation, monitoring customer issues and feature requests.</li>
+          <li>Reported, tracked and analyzed bugs over time, ensuring SLA compliance.</li>
+          <li>Completed SRE training (Jenkins, Terraform, Docker, Kubernetes and AWS), earning the Google Professional Cloud Architect and HashiCorp Terraform Associate certifications.</li>
+          <li>Worked in multinational teams where communication, training and management were 100% in English.</li>
+        </ul>
+        <div class="tec"><span>Kubernetes</span><span>Docker</span><span>Terraform</span><span>Jenkins</span><span>GCP</span><span>AWS</span></div>
+      </article>
+
+      <article class="puesto">
+        <h3>DevOps · TechOps Technology Specialist</h3>
+        <p class="meta"><span class="empresa">VMLY&amp;R</span> · Apr 2021 – Jan 2022</p>
+        <ul>
+          <li>DevOps role for clients including Ford, Lincoln, Plante Moran and General Dynamics.</li>
+          <li>Managed infrastructure and microsites on Rackspace and Azure as infrastructure as code.</li>
+          <li>Implemented Jenkins CI/CD pipelines for Apache servers; managed releases, backups and disaster recovery.</li>
+          <li>First role working professionally in English, coordinating with international teams.</li>
+        </ul>
+        <div class="tec"><span>Azure</span><span>Rackspace</span><span>Jenkins</span><span>Apache</span><span>Git</span><span>Kubernetes</span></div>
+      </article>
+
+      <article class="puesto">
+        <h3>Automation Engineer Jr. · Systems Administrator</h3>
+        <p class="meta"><span class="empresa">Santander Global Tech / Produban México</span> · Aug 2017 – Mar 2021 · Querétaro</p>
+        <ul>
+          <li>Implemented Ansible playbooks and roles with Jenkins for servers across multiple group projects.</li>
+          <li>Administered RHEL, AIX and Windows Server systems in development, pre-production and production environments for Mexico, the United States, Uruguay, Puerto Rico, Colombia and Peru.</li>
+          <li>L2 support and incident response across all environments through ServiceNow, including on-call shifts.</li>
+          <li>Server Factory and architecture analyst; supported VMware and OpenStack platforms.</li>
+        </ul>
+        <div class="tec"><span>Ansible</span><span>Jenkins</span><span>RHEL</span><span>AIX</span><span>Windows Server</span><span>VMware</span><span>OpenStack</span><span>ServiceNow</span></div>
+      </article>
+
+      <article class="puesto">
+        <h3>Software Developer</h3>
+        <p class="meta"><span class="empresa">Grupo Arquimo</span> · Jul 2016 – Aug 2017 · Morelia</p>
+        <ul>
+          <li>Web development for finance-related business projects and support for financial systems.</li>
+        </ul>
+      </article>
+
+      <!-- ===================== PROYECTOS ===================== -->
+      <!--
+        Aquí muestras tu transición hacia datos e IA.
+        Para agregar un proyecto, copia un bloque <div class="proyecto">.
+        Si subes el código o un reporte a GitHub, agrega un enlace:
+        <a href="https://github.com/TU-USUARIO/proyecto" target="_blank">Ver proyecto</a>
+      -->
+      <h2>Projects</h2>
+      <div class="proyectos">
+
+        <div class="proyecto">
+          <h3>Customer Churn Prediction</h3>
+          <p class="meta">Tecnológico de Monterrey · RetailGenix case study</p>
+          <p>Built a neural network to predict which customers are most likely to churn.</p>
+          <div class="tec"><span>SAS Viya</span><span>Neural networks</span><span>Machine Learning</span></div>
+        </div>
+
+        <div class="proyecto">
+          <h3>Cybersecurity in Mexican SMEs</h3>
+          <p class="meta">Tecnológico de Monterrey · Team project</p>
+          <p>Analysis of how vulnerable small and medium-sized businesses in Mexico are to cyberattacks.</p>
+          <div class="tec"><span>Cybersecurity</span><span>Risk analysis</span><span>AI</span></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================== COLUMNA LATERAL ===================== -->
+    <aside class="lateral">
+
+      <!--
+        FOTO: para poner tu foto en lugar de las iniciales,
+        guarda tu imagen como "foto.jpg" en la misma carpeta que este archivo
+        y cambia la línea de abajo por:
+        <img class="avatar" src="foto.jpg" alt="Foto de Alex Verboonen">
+        (La foto nunca sale en el PDF, para que sea apto para empresas internacionales.)
+      -->
+      <div class="avatar">AV</div>
+
+      <h2 class="no-imprimir">Contact</h2>
+      <ul class="no-imprimir">
+        <li>📍 Querétaro, Mexico</li>
+        <!-- Para agregar tu correo, copia esta línea quitando los signos de comentario:
+        <li>✉️ <a href="mailto:tu-correo@ejemplo.com">tu-correo@ejemplo.com</a></li>
+        -->
+        <li>🔗 <a href="https://www.linkedin.com/in/alex-verboonen/" target="_blank">linkedin.com/in/alex-verboonen</a></li>
+      </ul>
+
+      <h2>Skills</h2>
+      <!-- Agrupadas por categoría. Para agregar una, copia una línea <span> -->
+      <h3>Cloud</h3>
+      <div class="etiquetas">
+        <span class="etiqueta">Google Cloud (GCP)</span>
+        <span class="etiqueta">Azure</span>
+        <span class="etiqueta">AWS</span>
+        <span class="etiqueta">VMware</span>
+        <span class="etiqueta">OpenStack</span>
+      </div>
+      <h3>Containers & IaC</h3>
+      <div class="etiquetas">
+        <span class="etiqueta">Kubernetes</span>
+        <span class="etiqueta">Docker</span>
+        <span class="etiqueta">Terraform</span>
+        <span class="etiqueta">Ansible</span>
+      </div>
+      <h3>CI/CD & Operations</h3>
+      <div class="etiquetas">
+        <span class="etiqueta">Jenkins</span>
+        <span class="etiqueta">Git</span>
+        <span class="etiqueta">Zabbix</span>
+        <span class="etiqueta">Elasticsearch</span>
+        <span class="etiqueta">Jira</span>
+        <span class="etiqueta">ServiceNow</span>
+      </div>
+      <h3>Operating Systems</h3>
+      <div class="etiquetas">
+        <span class="etiqueta">Linux (RHEL)</span>
+        <span class="etiqueta">Unix (AIX)</span>
+        <span class="etiqueta">Windows Server</span>
+        <span class="etiqueta">Apache</span>
+      </div>
+      <h3>Data & AI</h3>
+      <div class="etiquetas">
+        <span class="etiqueta">Python</span>
+        <span class="etiqueta">Data science</span>
+        <span class="etiqueta">Data visualization</span>
+        <span class="etiqueta">Machine Learning</span>
+        <span class="etiqueta">SAS Viya</span>
+      </div>
+
+      <h2>Languages</h2>
+      <ul>
+        <li>Spanish: native</li>
+        <li>English: professional<br><small>Daily use at work since 2021 (VMLY&amp;R, EPAM, TCS)</small></li>
+        <li>French: conversational</li>
+      </ul>
+
+      <h2>Education</h2>
+      <ul>
+        <li>
+          <strong>Master's in Applied Artificial Intelligence</strong><br>
+          Tecnológico de Monterrey<br>
+          <small>In progress</small>
+        </li>
+        <li>
+          <strong>B.Eng. in Information and Communication Technologies</strong><br>
+          Instituto Tecnológico de Morelia (Morelia Institute of Technology)<br>
+          <small>2012 – 2017 · Graduated via EGEL-CENEVAL exam with Outstanding Performance</small>
+        </li>
+      </ul>
+
+      <h2>Certifications</h2>
+      <ul>
+        <li>Google Professional Cloud Architect<br><small>Google · 2023</small></li>
+        <li>HashiCorp Certified: Terraform Associate<br><small>HashiCorp · 2023</small></li>
+        <li>Advanced Specialization Certificate: Data Visualization<br><small>Tecnológico de Monterrey · 2026</small></li>
+        <li>Enterprise Data Science in Practice<br><small>IBM · 2026</small></li>
+        <li>Scrum Fundamentals Certified<br><small>SCRUMstudy · 2019</small></li>
+        <!-- Tienes 15 en LinkedIn: agrega aquí las que quieras destacar -->
+      </ul>
+    </aside>
+
+  </main>
+</body>
+</html>
