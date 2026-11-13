@@ -20,14 +20,14 @@
        de fondo, pensado para los sistemas ATS de las empresas.
   ============================================================
 -->
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <!-- Hace que la página se vea bien en celulares -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alex Verboonen Cabrera · Systems Engineer & DevOps</title>
   <!-- Descripción que muestran Google y las redes al compartir el enlace -->
-  <meta name="description" content="Currículum de Alex Verboonen Cabrera: Systems Engineer y DevOps con más de 10 años de experiencia en infraestructura, Linux, Kubernetes, Terraform y cloud.">
+  <meta name="description" content="Resume of Alex Verboonen Cabrera: Systems Engineer and DevOps professional with 10+ years of experience in infrastructure, Linux, Kubernetes, Terraform and cloud.">
 
   <style>
     /* ---------- 1. VARIABLES DE DISEÑO (cámbialas a tu gusto) ---------- */
@@ -200,6 +200,7 @@
 
     .solo-imprimir { display: none; }
     .idioma { font-size: 14px; margin: -12px 0 16px; }
+
     /* ---------- 6. CELULARES: una sola columna ---------- */
     @media (max-width: 760px) {
       body { padding: 0; }
@@ -271,24 +272,25 @@
 
       <h1>Alex Verboonen Cabrera</h1>
       <p class="titular">Systems Engineer · DevOps · Google Cloud Architect</p>
-      <p class="no-imprimir idioma"><strong>Español</strong> · <a href="/en/">English</a></p>
+      <!-- Enlace a la versión en español (no sale en el PDF) -->
+      <p class="no-imprimir idioma"><a href="/cv/es/">Español</a> · <strong>English</strong></p>
       <!-- Línea de contacto que solo aparece en el PDF, justo debajo de tu nombre (si agregas tu correo, ponlo aquí también) -->
-      <p class="solo-imprimir">Querétaro, México · linkedin.com/in/alex-verboonen</p>
+      <p class="solo-imprimir">Querétaro, Mexico · linkedin.com/in/alex-verboonen</p>
 
       <!-- PERFIL: 3 a 5 líneas, como recomiendan las guías actuales -->
       <p>
-        Ingeniero de sistemas y DevOps con más de 10 años de experiencia en infraestructura
-        para empresas globales como Tata Consultancy Services, EPAM Systems y Grupo Santander.
-        Especializado en Linux, Kubernetes, Docker, infraestructura como código (Terraform, Ansible),
-        CI/CD y monitoreo, con experiencia en GCP, Azure y AWS. Desde 2017 trabajo en equipos
-        multinacionales y distribuidos. Google Professional Cloud Architect y HashiCorp Terraform Associate;
-        actualmente cursando la Maestría en Inteligencia Artificial Aplicada en el Tec de Monterrey.
+        Systems Engineer and DevOps professional with 10+ years of infrastructure experience at global
+        companies such as Tata Consultancy Services, EPAM Systems and Santander Group. Specialized in Linux,
+        Kubernetes, Docker, infrastructure as code (Terraform, Ansible), CI/CD and monitoring, with hands-on
+        experience in GCP, Azure and AWS. Working with multinational, distributed teams since 2017.
+        Google Professional Cloud Architect and HashiCorp Terraform Associate; currently pursuing a
+        Master's in Applied Artificial Intelligence at Tecnológico de Monterrey.
       </p>
 
       <!-- Botón para imprimir o guardar como PDF (no aparece en el PDF) -->
-      <button class="boton no-imprimir" onclick="window.print()">⬇ Descargar CV en PDF</button>
+      <button class="boton no-imprimir" onclick="window.print()">⬇ Download PDF résumé</button>
 
-      <h2>Experiencia</h2>
+      <h2>Experience</h2>
 
       <!--
         Cada trabajo es un bloque <article class="puesto">.
@@ -303,60 +305,60 @@
       -->
 
       <article class="puesto">
-        <h3>Systems Engineer · asignado a LSEG</h3>
-        <p class="meta"><span class="empresa">Tata Consultancy Services</span> · oct. 2023 – actualidad · Querétaro (remoto)</p>
+        <h3>Systems Engineer · assigned to LSEG</h3>
+        <p class="meta"><span class="empresa">Tata Consultancy Services</span> · Oct 2023 – Present · Querétaro (remote)</p>
         <ul>
           <!-- ✍️ Si tienes cifras (alertas reducidas, tiempo de respuesta, nº de servidores), agrégalas aquí -->
-          <li>Construí desde cero la plataforma de monitoreo Zabbix (de Docker a RHEL) e integré sus alertas con BigPanda.</li>
-          <li>Esquema de soporte 24/7 nivel L2 para plataformas críticas de London Stock Exchange Group; participación en salas de crisis para incidentes P1/P2.</li>
-          <li>Diagnóstico a nivel aplicación y sistema operativo en cuatro aplicaciones principales, incluido un servicio en AWS.</li>
-          <li>Soporte a clústeres de Elasticsearch y mantenimiento preventivo: reinicios, verificaciones previas y posteriores, y validación de hardware.</li>
-          <li>Colaboración diaria en inglés con equipos globales; gestión de tickets en Jira.</li>
+          <li>Built a Zabbix monitoring platform from scratch (Docker → RHEL) and integrated its alerts with BigPanda.</li>
+          <li>24/7 L2 support model for critical London Stock Exchange Group platforms; joined technical recovery calls for P1/P2 incidents.</li>
+          <li>Troubleshot four core applications, including an AWS service, at both application and OS level.</li>
+          <li>Supported Elasticsearch clusters and ran preventive maintenance: reboots, pre/post checks and hardware validations.</li>
+          <li>Daily collaboration in English with global teams; ticket management in Jira.</li>
         </ul>
         <div class="tec"><span>Zabbix</span><span>BigPanda</span><span>RHEL</span><span>Docker</span><span>Elasticsearch</span><span>AWS</span><span>Jira</span></div>
       </article>
 
       <article class="puesto">
         <h3>Systems Engineer</h3>
-        <p class="meta"><span class="empresa">EPAM Systems</span> · ene. 2022 – jul. 2023</p>
+        <p class="meta"><span class="empresa">EPAM Systems</span> · Jan 2022 – Jul 2023</p>
         <ul>
-          <li>Soporte L2 en esquema 20×7 con cuatro turnos: monitoreo de incidencias y solicitudes de clientes.</li>
-          <li>Reporte, seguimiento y análisis de bugs a lo largo del tiempo, asegurando el cumplimiento de SLA.</li>
-          <li>Formación SRE (Jenkins, Terraform, Docker, Kubernetes y AWS) que culminó en las certificaciones Google Professional Cloud Architect y HashiCorp Terraform Associate.</li>
-          <li>Trabajo en equipos multinacionales con comunicación, cursos y gestión 100% en inglés.</li>
+          <li>L2 support in a 20×7, four-shift rotation, monitoring customer issues and feature requests.</li>
+          <li>Reported, tracked and analyzed bugs over time, ensuring SLA compliance.</li>
+          <li>Completed SRE training (Jenkins, Terraform, Docker, Kubernetes and AWS), earning the Google Professional Cloud Architect and HashiCorp Terraform Associate certifications.</li>
+          <li>Worked in multinational teams where communication, training and management were 100% in English.</li>
         </ul>
         <div class="tec"><span>Kubernetes</span><span>Docker</span><span>Terraform</span><span>Jenkins</span><span>GCP</span><span>AWS</span></div>
       </article>
 
       <article class="puesto">
         <h3>DevOps · TechOps Technology Specialist</h3>
-        <p class="meta"><span class="empresa">VMLY&amp;R</span> · abr. 2021 – ene. 2022</p>
+        <p class="meta"><span class="empresa">VMLY&amp;R</span> · Apr 2021 – Jan 2022</p>
         <ul>
-          <li>Rol DevOps para clientes como Ford, Lincoln, Plante Moran y General Dynamics.</li>
-          <li>Gestión de infraestructura y micrositios en Rackspace y Azure como infraestructura como código.</li>
-          <li>Implementación de pipelines CI/CD con Jenkins para servidores Apache; gestión de releases, respaldos y recuperación ante desastres.</li>
-          <li>Primer rol con comunicación profesional en inglés, coordinándome con equipos internacionales.</li>
+          <li>DevOps role for clients including Ford, Lincoln, Plante Moran and General Dynamics.</li>
+          <li>Managed infrastructure and microsites on Rackspace and Azure as infrastructure as code.</li>
+          <li>Implemented Jenkins CI/CD pipelines for Apache servers; managed releases, backups and disaster recovery.</li>
+          <li>First role working professionally in English, coordinating with international teams.</li>
         </ul>
         <div class="tec"><span>Azure</span><span>Rackspace</span><span>Jenkins</span><span>Apache</span><span>Git</span><span>Kubernetes</span></div>
       </article>
 
       <article class="puesto">
-        <h3>Automator Jr. · Administrador de sistemas</h3>
-        <p class="meta"><span class="empresa">Santander Global Tech / Produban México</span> · ago. 2017 – mar. 2021 · Querétaro</p>
+        <h3>Automation Engineer Jr. · Systems Administrator</h3>
+        <p class="meta"><span class="empresa">Santander Global Tech / Produban México</span> · Aug 2017 – Mar 2021 · Querétaro</p>
         <ul>
-          <li>Implementación de playbooks y roles con Ansible y Jenkins para los servidores de distintos proyectos del grupo.</li>
-          <li>Administración de servidores RHEL, AIX y Windows Server en entornos de desarrollo, preproducción y producción para México, Estados Unidos, Uruguay, Puerto Rico, Colombia y Perú.</li>
-          <li>Soporte L2 y atención de incidentes en todos los entornos mediante ServiceNow, con guardias según la operación.</li>
-          <li>Analista de Server Factory y arquitectura; soporte a plataformas VMware y OpenStack.</li>
+          <li>Implemented Ansible playbooks and roles with Jenkins for servers across multiple group projects.</li>
+          <li>Administered RHEL, AIX and Windows Server systems in development, pre-production and production environments for Mexico, the United States, Uruguay, Puerto Rico, Colombia and Peru.</li>
+          <li>L2 support and incident response across all environments through ServiceNow, including on-call shifts.</li>
+          <li>Server Factory and architecture analyst; supported VMware and OpenStack platforms.</li>
         </ul>
         <div class="tec"><span>Ansible</span><span>Jenkins</span><span>RHEL</span><span>AIX</span><span>Windows Server</span><span>VMware</span><span>OpenStack</span><span>ServiceNow</span></div>
       </article>
 
       <article class="puesto">
-        <h3>Desarrollador de software</h3>
-        <p class="meta"><span class="empresa">Grupo Arquimo</span> · jul. 2016 – ago. 2017 · Morelia</p>
+        <h3>Software Developer</h3>
+        <p class="meta"><span class="empresa">Grupo Arquimo</span> · Jul 2016 – Aug 2017 · Morelia</p>
         <ul>
-          <li>Desarrollo web para proyectos de negocio relacionados con actividades financieras y soporte a sistemas financieros.</li>
+          <li>Web development for finance-related business projects and support for financial systems.</li>
         </ul>
       </article>
 
@@ -367,21 +369,21 @@
         Si subes el código o un reporte a GitHub, agrega un enlace:
         <a href="https://github.com/TU-USUARIO/proyecto" target="_blank">Ver proyecto</a>
       -->
-      <h2>Proyectos</h2>
+      <h2>Projects</h2>
       <div class="proyectos">
 
         <div class="proyecto">
-          <h3>Predicción de abandono de clientes</h3>
-          <p class="meta">Tecnológico de Monterrey · Caso RetailGenix</p>
-          <p>Construcción de una red neuronal para predecir qué clientes tienen mayor riesgo de abandonar la empresa.</p>
-          <div class="tec"><span>SAS Viya</span><span>Redes neuronales</span><span>Machine Learning</span></div>
+          <h3>Customer Churn Prediction</h3>
+          <p class="meta">Tecnológico de Monterrey · RetailGenix case study</p>
+          <p>Built a neural network to predict which customers are most likely to churn.</p>
+          <div class="tec"><span>SAS Viya</span><span>Neural networks</span><span>Machine Learning</span></div>
         </div>
 
         <div class="proyecto">
-          <h3>Ciberseguridad en PyMEs mexicanas</h3>
-          <p class="meta">Tecnológico de Monterrey · Proyecto en equipo</p>
-          <p>Análisis de la vulnerabilidad de pequeñas y medianas empresas en México frente a ciberataques.</p>
-          <div class="tec"><span>Ciberseguridad</span><span>Análisis de riesgo</span><span>IA</span></div>
+          <h3>Cybersecurity in Mexican SMEs</h3>
+          <p class="meta">Tecnológico de Monterrey · Team project</p>
+          <p>Analysis of how vulnerable small and medium-sized businesses in Mexico are to cyberattacks.</p>
+          <div class="tec"><span>Cybersecurity</span><span>Risk analysis</span><span>AI</span></div>
         </div>
 
       </div>
@@ -399,16 +401,16 @@
       -->
       <div class="avatar">AV</div>
 
-      <h2 class="no-imprimir">Contacto</h2>
+      <h2 class="no-imprimir">Contact</h2>
       <ul class="no-imprimir">
-        <li>📍 Querétaro, México</li>
+        <li>📍 Querétaro, Mexico</li>
         <!-- Para agregar tu correo, copia esta línea quitando los signos de comentario:
         <li>✉️ <a href="mailto:tu-correo@ejemplo.com">tu-correo@ejemplo.com</a></li>
         -->
         <li>🔗 <a href="https://www.linkedin.com/in/alex-verboonen/" target="_blank">linkedin.com/in/alex-verboonen</a></li>
       </ul>
 
-      <h2>Habilidades</h2>
+      <h2>Skills</h2>
       <!-- Agrupadas por categoría. Para agregar una, copia una línea <span> -->
       <h3>Cloud</h3>
       <div class="etiquetas">
@@ -418,14 +420,14 @@
         <span class="etiqueta">VMware</span>
         <span class="etiqueta">OpenStack</span>
       </div>
-      <h3>Contenedores e IaC</h3>
+      <h3>Containers & IaC</h3>
       <div class="etiquetas">
         <span class="etiqueta">Kubernetes</span>
         <span class="etiqueta">Docker</span>
         <span class="etiqueta">Terraform</span>
         <span class="etiqueta">Ansible</span>
       </div>
-      <h3>CI/CD y operación</h3>
+      <h3>CI/CD & Operations</h3>
       <div class="etiquetas">
         <span class="etiqueta">Jenkins</span>
         <span class="etiqueta">Git</span>
@@ -434,48 +436,48 @@
         <span class="etiqueta">Jira</span>
         <span class="etiqueta">ServiceNow</span>
       </div>
-      <h3>Sistemas operativos</h3>
+      <h3>Operating Systems</h3>
       <div class="etiquetas">
         <span class="etiqueta">Linux (RHEL)</span>
         <span class="etiqueta">Unix (AIX)</span>
         <span class="etiqueta">Windows Server</span>
         <span class="etiqueta">Apache</span>
       </div>
-      <h3>Datos e IA</h3>
+      <h3>Data & AI</h3>
       <div class="etiquetas">
         <span class="etiqueta">Python</span>
-        <span class="etiqueta">Ciencia de datos</span>
-        <span class="etiqueta">Visualización de datos</span>
+        <span class="etiqueta">Data science</span>
+        <span class="etiqueta">Data visualization</span>
         <span class="etiqueta">Machine Learning</span>
         <span class="etiqueta">SAS Viya</span>
       </div>
 
-      <h2>Idiomas</h2>
+      <h2>Languages</h2>
       <ul>
-        <li>Español: nativo</li>
-        <li>Inglés: profesional<br><small>Uso diario en el trabajo desde 2021 (VMLY&amp;R, EPAM, TCS)</small></li>
-        <li>Francés: conversacional</li>
+        <li>Spanish: native</li>
+        <li>English: professional<br><small>Daily use at work since 2021 (VMLY&amp;R, EPAM, TCS)</small></li>
+        <li>French: conversational</li>
       </ul>
 
-      <h2>Educación</h2>
+      <h2>Education</h2>
       <ul>
         <li>
-          <strong>Maestría en Inteligencia Artificial Aplicada</strong><br>
+          <strong>Master's in Applied Artificial Intelligence</strong><br>
           Tecnológico de Monterrey<br>
-          <small>En curso</small>
+          <small>In progress</small>
         </li>
         <li>
-          <strong>Ingeniería en Tecnologías de la Información y Comunicaciones</strong><br>
-          Instituto Tecnológico de Morelia<br>
-          <small>2012 – 2017 · Titulación por EGEL-CENEVAL con Desempeño Sobresaliente</small>
+          <strong>B.Eng. in Information and Communication Technologies</strong><br>
+          Instituto Tecnológico de Morelia (Morelia Institute of Technology)<br>
+          <small>2012 – 2017 · Graduated via EGEL-CENEVAL exam with Outstanding Performance</small>
         </li>
       </ul>
 
-      <h2>Certificaciones</h2>
+      <h2>Certifications</h2>
       <ul>
         <li>Google Professional Cloud Architect<br><small>Google · 2023</small></li>
         <li>HashiCorp Certified: Terraform Associate<br><small>HashiCorp · 2023</small></li>
-        <li>Certificado de Alta Especialidad: Visualización de datos<br><small>Tecnológico de Monterrey · 2026</small></li>
+        <li>Advanced Specialization Certificate: Data Visualization<br><small>Tecnológico de Monterrey · 2026</small></li>
         <li>Enterprise Data Science in Practice<br><small>IBM · 2026</small></li>
         <li>Scrum Fundamentals Certified<br><small>SCRUMstudy · 2019</small></li>
         <!-- Tienes 15 en LinkedIn: agrega aquí las que quieras destacar -->
