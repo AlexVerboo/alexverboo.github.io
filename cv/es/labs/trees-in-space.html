@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+   PÁGINA DE DETALLE DE UN LABORATORIO · PLANTILLA
+  ============================================================
+   Para agregar un laboratorio nuevo:
+     1. Copia este archivo en la misma carpeta con otro nombre
+        (ej. cv/es/labs/mi-proyecto.html) y haz lo mismo con la
+        versión en inglés (cv/en/labs/mi-proyecto.html).
+     2. Cambia solo el CONTENIDO: título, textos, etiquetas, diagramas,
+        tablas y enlaces. Los estilos viven en cv/labs/labs.css
+        y los diagramas se dibujan con cv/labs/labs.js (no se tocan).
+     3. En el selector de idioma, apunta al archivo del otro idioma.
+     4. Agrega la tarjeta en la sección Laboratorios de cv/es/index.html
+        y cv/en/index.html.
+
+   Puedes borrar las secciones que no necesites (por ejemplo, el
+   pipeline). Cada sección es un bloque <section> independiente.
+
+   DIAGRAMAS: se escriben como texto Mermaid dentro de <pre class="mermaid">.
+   Prueba tus diagramas en https://mermaid.live antes de pegarlos.
+   Evita los caracteres < y & dentro del diagrama; si una etiqueta lleva
+   paréntesis, ponla entre comillas: BOT["Bot Flask (Render)"].
+  ============================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trees in Space · TreeBot · Laboratorio de Alex Verboonen</title>
+  <meta name="description" content="TreeBot: bot y portal web que automatiza récords y estadísticas de una comunidad de Halo Infinite con Python, Flask, Google Sheets y GitHub Actions.">
+  <link rel="alternate" hreflang="es" href="https://alexverboo.github.io/cv/es/labs/trees-in-space.html">
+  <link rel="alternate" hreflang="en" href="https://alexverboo.github.io/cv/en/labs/trees-in-space.html">
+  <link rel="stylesheet" href="../../labs/labs.css">
+  <script type="module" src="../../labs/labs.js"></script>
+</head>
+
+<body>
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <div class="lab-pagina">
+
+    <!-- ===================== ENCABEZADO ===================== -->
+    <header class="lab-encabezado">
+      <nav class="lab-nav" aria-label="Navegación">
+        <a href="../#laboratorios">← Volver al CV</a>
+        <p class="idioma"><strong>Español</strong> · <a href="../../en/labs/trees-in-space.html" lang="en" hreflang="en">English</a></p>
+      </nav>
+
+      <p class="lab-etiqueta-tipo">Laboratorio</p>
+      <h1>Trees in Space · TreeBot</h1>
+      <p class="resumen">
+        Bot y portal web de <strong>Trees in Space</strong>, una comunidad de jugadores de Halo Infinite en Xbox.
+        Automatiza lo que antes se llevaba a mano en una hoja de cálculo: detecta los récords del grupo a partir
+        de las partidas reales, calcula estadísticas por jugador y por rol, y las publica en una web pública y en
+        el chat de GroupMe del grupo.
+      </p>
+
+      <ul class="tec" aria-label="Tecnologías principales">
+        <li>Python</li><li>Flask</li><li>GitHub Actions</li><li>Google Sheets</li>
+        <li>API de Halo Infinite</li><li>Xbox Live / Entra ID</li><li>GroupMe</li><li>Render</li>
+      </ul>
+
+      <div class="lab-enlaces">
+        <a class="boton" href="https://github.com/AlexVerboo/treebot" target="_blank" rel="noopener">Ver repositorio en GitHub</a>
+        <a class="boton secundario" href="https://treebot-vunp.onrender.com" target="_blank" rel="noopener">Ver demo en vivo</a>
+      </div>
+    </header>
+
+    <main id="contenido" class="lab-contenido">
+
+      <!-- ===================== STACK ===================== -->
+      <section aria-labelledby="stack">
+        <h2 id="stack">Stack tecnológico</h2>
+        <div class="tabla-scroll">
+          <table>
+            <thead><tr><th scope="col">Capa</th><th scope="col">Tecnología</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Lenguaje</th><td>Python (bot web en Render; scripts de automatización en Python 3.11)</td></tr>
+              <tr><th scope="row">Web / bot</th><td>Flask, Gunicorn, plantillas Jinja2 (HTML)</td></tr>
+              <tr><th scope="row">Datos</th><td>Google Sheets (vía <code>gspread</code> + cuenta de servicio de Google Cloud)</td></tr>
+              <tr><th scope="row">APIs externas</th><td>Halo Infinite (API no oficial, librería SPNKr), Xbox Live (autenticación con app de Microsoft Entra ID / Azure), GroupMe Bots API, GitHub REST API (<code>workflow_dispatch</code>)</td></tr>
+              <tr><th scope="row">Automatización</th><td>GitHub Actions (cron, ejecución manual y disparo por API)</td></tr>
+              <tr><th scope="row">Hosting</th><td>Render (servicio web, <code>Procfile</code> + Gunicorn)</td></tr>
+              <tr><th scope="row">Secretos</th><td>GitHub Secrets y variables de entorno de Render</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===================== ARQUITECTURA ===================== -->
+      <section aria-labelledby="arquitectura">
+        <h2 id="arquitectura">Arquitectura del servicio</h2>
+        <ul>
+          <li><strong>Bot web (Flask en Render):</strong> recibe los mensajes de GroupMe por webhook, responde comandos (récords, estadísticas personales, menú) y sirve la web pública de récords y roles, además de endpoints JSON.</li>
+          <li><strong>Capa de datos (<code>sheets.py</code>):</strong> acceso único a Google Sheets con caché en memoria de 5 minutos; lo comparten el bot y los scripts.</li>
+          <li><strong>Workers en GitHub Actions:</strong> scripts que consultan la API de Halo (actualizador de récords, estadísticas por jugador, resumen nocturno “GGs”, alta de miembros) y escriben en la hoja o en GroupMe.</li>
+          <li><strong>Google Sheets:</strong> funciona como base de datos: récords, miembros, roles, estadísticas y una caché de identificadores de Xbox (XUIDs).</li>
+        </ul>
+
+        <figure class="diagrama">
+<pre class="mermaid">
+flowchart TB
+    accTitle: Arquitectura de TreeBot
+    accDescr: Los miembros escriben en GroupMe, que envía los mensajes por webhook al bot Flask en Render. El bot responde en GroupMe, lee Google Sheets, dispara workflows de GitHub Actions y sirve la web pública. GitHub Actions usa SPNKr para consultar la API de Halo Infinite, se autentica en Xbox Live con Entra ID, escribe en Google Sheets y publica resúmenes en GroupMe.
+    U[Miembros] -->|mensajes| GM[GroupMe]
+    GM -->|webhook| BOT["Bot Flask (Render)"]
+    BOT -->|respuestas| GM
+    BOT <-->|lectura| GS[(Google Sheets)]
+    BOT -->|dispatch| GHA[GitHub Actions]
+    GHA -->|SPNKr| HALO[API Halo Infinite]
+    GHA -->|auth| XBL[Xbox Live / Entra ID]
+    GHA -->|escritura| GS
+    GHA -->|resúmenes| GM
+    BOT --> WEB["Web pública (récords y roles)"]
+    WEB --> U
+</pre>
+          <figcaption>Figura 1. Componentes de TreeBot y cómo se comunican.</figcaption>
+        </figure>
+      </section>
+
+      <!-- ===================== FLUJO DE DATOS ===================== -->
+      <section aria-labelledby="flujo">
+        <h2 id="flujo">Flujo de datos</h2>
+        <ol class="pasos">
+          <li>
+            <strong>Fuente: partidas de Halo Infinite <span class="modo">automático</span></strong>
+            Un workflow diario se autentica en Xbox Live y, con SPNKr, revisa las últimas partidas de matchmaking de cada miembro.
+          </li>
+          <li>
+            <strong>Procesamiento <span class="modo">automático</span></strong>
+            Se filtran las partidas ganadas en Big Team Battle, Squad Battle y Heavies con al menos 5 miembros del grupo en el mismo equipo (regla de la comunidad). Cada resultado se compara con el récord vigente de ese mapa y modo (menor tiempo o mayor margen en Slayer). En paralelo se calcula el historial de por vida de cada jugador.
+          </li>
+          <li>
+            <strong>Almacenamiento <span class="modo">automático</span></strong>
+            Los récords nuevos se escriben en Google Sheets y el anterior pasa a la sección “Good Times”. Las estadísticas se guardan en una hoja propia y los XUIDs se guardan en caché para no repetir búsquedas.
+          </li>
+          <li>
+            <strong>Datos manuales <span class="modo">manual</span></strong>
+            Los miembros se dan de alta con un workflow manual (gamertag de entrada) y los roles de cada jugador (Roamer, Anchor, Objective, Driver) se marcan con casillas en la hoja.
+          </li>
+          <li>
+            <strong>Publicación <span class="modo">automático, bajo demanda</span></strong>
+            El bot lee la hoja (con caché) y la muestra en la web pública (récords y una página de roles con tablas ordenables), en endpoints JSON y como respuesta a los comandos de GroupMe.
+          </li>
+          <li>
+            <strong>Resumen de la noche <span class="modo">bajo demanda</span></strong>
+            Cuando alguien escribe <code>ggs</code> en el chat, el bot dispara un workflow que resume las partidas de las últimas horas (marcador W‑L, lista de partidas y líderes por promedio) y lo publica en GroupMe en aproximadamente 1 minuto.
+          </li>
+        </ol>
+      </section>
+
+      <!-- ===================== PIPELINE ===================== -->
+      <section aria-labelledby="pipeline">
+        <h2 id="pipeline">CI/CD con GitHub Actions</h2>
+
+        <figure class="diagrama">
+<pre class="mermaid">
+flowchart TD
+    accTitle: Workflows de GitHub Actions
+    accDescr: Update Halo records se ejecuta por cron diario o a mano; corre records_updater.py y luego player_stats_updater.py, ambos escriben en Google Sheets y el primero puede avisar en GroupMe. GGs summary lo dispara el bot cuando alguien escribe ggs, o se corre a mano, y publica en GroupMe. Add member se corre a mano con un gamertag y escribe en Google Sheets.
+    CRON[Cron diario] --> UR[Update Halo records]
+    MAN1[Manual] --> UR
+    UR --> S1[records_updater.py]
+    S1 --> S2[player_stats_updater.py]
+    S1 --> SH[(Google Sheets)]
+    S2 --> SH
+    S1 -. opcional .-> GM[GroupMe]
+
+    CHAT[ggs en GroupMe] --> BOT[Bot Render]
+    BOT -->|API dispatch| GG[GGs summary]
+    MAN2[Manual] --> GG
+    GG --> GM
+
+    MAN3[Manual + gamertag] --> AM[Add member]
+    AM --> SH
+</pre>
+          <figcaption>Figura 2. Disparadores y salidas de los tres workflows.</figcaption>
+        </figure>
+
+        <div class="tabla-scroll">
+          <table>
+            <caption>Workflows del repositorio</caption>
+            <thead>
+              <tr><th scope="col">Workflow</th><th scope="col">Disparador</th><th scope="col">Qué hace</th><th scope="col">Qué produce</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Update Halo records</th>
+                <td><code>schedule</code> (cron diario, 00:17 hora de CDMX) y <code>workflow_dispatch</code> con opción <em>dry run</em></td>
+                <td>Paso 1: busca récords nuevos del grupo. Paso 2 (corre aunque falle el 1): calcula estadísticas por jugador y ordena la hoja de roles por última partida.</td>
+                <td>Hojas de récords, “Player Stats” y “Roles” actualizadas; aviso opcional en GroupMe.</td>
+              </tr>
+              <tr>
+                <th scope="row">GGs summary</th>
+                <td><code>workflow_dispatch</code>: lo dispara el bot por la API de GitHub o se corre a mano (horas hacia atrás, <em>dry run</em>)</td>
+                <td>Reúne las partidas recientes con 2 o más miembros en el mismo equipo y arma el resumen.</td>
+                <td>Mensaje en GroupMe. Usa <code>concurrency</code> para no encimar ejecuciones y el bot aplica un <em>cooldown</em> de 5 min.</td>
+              </tr>
+              <tr>
+                <th scope="row">Add member</th>
+                <td><code>workflow_dispatch</code> (gamertag como entrada)</td>
+                <td>Valida el gamertag contra Xbox y lo agrega como miembro.</td>
+                <td>Nueva fila en la hoja de miembros.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="nota">
+          Todos usan <code>ubuntu-latest</code>, Python 3.11, dependencias fijadas y credenciales desde GitHub Secrets.
+          El despliegue del bot no pasa por Actions: Render lo despliega automáticamente desde la rama <code>master</code>.
+          No hay workflow de pruebas automatizadas.
+        </p>
+      </section>
+
+      <!-- ===================== RETOS ===================== -->
+      <section aria-labelledby="retos">
+        <h2 id="retos">Retos y decisiones técnicas</h2>
+        <ul class="retos">
+          <li>
+            <h3>Dos runtimes de Python</h3>
+            <p>El servicio en Render corre una versión de Python anterior a la que pide SPNKr (3.11 o superior). En vez de migrar todo de golpe, la lógica pesada se movió a GitHub Actions con su propio archivo de dependencias, y el bot solo la <em>dispara</em> por la API de GitHub. Resultado: un bot web ligero y workers sin servidor.</p>
+          </li>
+          <li>
+            <h3>Límites de la API de Halo (HTTP 429)</h3>
+            <p>La búsqueda de gamertags se saturaba con facilidad. Se agregaron reintentos con pausa para 429 y 5xx, y una hoja de caché de XUIDs que comparten todos los scripts, de modo que cada jugador se busca una sola vez.</p>
+          </li>
+          <li>
+            <h3>Integridad de los datos</h3>
+            <p>La regla “récord válido solo con 5 o más miembros” quedó en código y es configurable. Heavies se clasifica por mapa y variante, y los nombres de mapas se normalizan. Además se corrigió un error de configuración regional: la hoja usa coma decimal y <code>10,577</code> se leía como <code>10577</code>; ahora se leen valores sin formato.</p>
+          </li>
+          <li>
+            <h3>Gestión de secretos</h3>
+            <p>Las credenciales salieron del repositorio (<code>.gitignore</code> explícito), se rotó la llave de la cuenta de servicio y todo se inyecta desde GitHub Secrets y variables de entorno de Render.</p>
+          </li>
+          <li>
+            <h3>Operación sin intervención</h3>
+            <p>Cada workflow tiene modo <em>dry run</em> y <em>timeouts</em>, y el paso de estadísticas corre aunque falle el de récords. Así el mantenimiento diario no requiere a nadie y se puede probar sin tocar datos reales.</p>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ===================== LO QUE DEMUESTRA ===================== -->
+      <section aria-labelledby="demuestra">
+        <h2 id="demuestra">Lo que demuestra</h2>
+        <ul>
+          <li><strong>Automatización y orquestación:</strong> pipelines programados y bajo demanda en GitHub Actions, incluido el disparo desde una app externa vía <code>workflow_dispatch</code>.</li>
+          <li><strong>Integración de APIs:</strong> cuatro servicios externos con distintos esquemas de autenticación (OAuth con Microsoft/Xbox, cuenta de servicio de Google, token de bot y token de GitHub).</li>
+          <li><strong>Diseño de sistemas pequeños:</strong> separación entre servicio web, capa de datos y workers; caché; manejo de <em>rate limits</em>; idempotencia y <em>dry runs</em>.</li>
+          <li><strong>Pipeline-as-code y gestión de configuración:</strong> workflows versionados, variables por entorno y secretos centralizados.</li>
+          <li><strong>Refactorización de código heredado:</strong> el bot nació en 2022 y en 2026 se reorganizó en módulos (<code>sheets.py</code>, <code>roles.py</code>), con dependencias fijadas y nuevas funciones.</li>
+          <li><strong>Desarrollo asistido por IA:</strong> la modernización de 2026 se diseñó e implementó en pareja con Claude (Anthropic) como agente de programación: diagnóstico, refactor, nuevas funciones y depuración en producción.</li>
+          <li><strong>Producto para usuarios reales:</strong> lo usa a diario una comunidad de unos 30 jugadores.</li>
+        </ul>
+      </section>
+
+      <!-- ===================== ENLACES ===================== -->
+      <section aria-labelledby="enlaces">
+        <h2 id="enlaces">Enlaces</h2>
+        <ul>
+          <li>Repositorio: <a href="https://github.com/AlexVerboo/treebot" target="_blank" rel="noopener">github.com/AlexVerboo/treebot</a></li>
+          <li>Demo en vivo (récords): <a href="https://treebot-vunp.onrender.com" target="_blank" rel="noopener">treebot-vunp.onrender.com</a></li>
+          <li>Página de roles: <a href="https://treebot-vunp.onrender.com/roles" target="_blank" rel="noopener">treebot-vunp.onrender.com/roles</a></li>
+        </ul>
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>

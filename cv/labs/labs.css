@@ -1,0 +1,246 @@
+/*
+  ============================================================
+   ESTILOS COMPARTIDOS DE LAS PÁGINAS DE LABORATORIO
+  ============================================================
+   Lo usan todas las páginas de detalle en /cv/es/labs/ y /cv/en/labs/.
+   Usa los mismos colores y tipografía que el CV (cv/es/index.html).
+   Si cambias un color en el CV, cámbialo también aquí en :root.
+
+   Para agregar un laboratorio NO necesitas tocar este archivo:
+   copia una página de detalle existente y cambia solo el contenido.
+  ============================================================
+*/
+
+/* ---------- 1. VARIABLES (las mismas del CV) ---------- */
+:root {
+  --color-fondo:      #f5f6f8;
+  --color-tarjeta:    #ffffff;
+  --color-lateral:    #14213d;
+  --color-acento:     #2a9d8f;   /* decoración: líneas, puntos, bordes */
+  --color-acento-osc: #1d6b62;   /* texto y botones sobre blanco (contraste AA) */
+  --color-acento-bg:  #e6f4f2;
+  --color-texto:      #1f2933;
+  --color-suave:      #5f6b7a;
+  --color-borde:      #e1e5ea;
+  --fuente: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+}
+
+/* ---------- 2. BASE ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--fuente);
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  line-height: 1.6;
+  padding: 40px 16px;
+}
+
+a { color: var(--color-acento-osc); }
+a:hover { text-decoration-thickness: 2px; }
+
+/* Foco visible para navegación con teclado */
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+  outline: 3px solid var(--color-acento);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Enlace "Saltar al contenido": invisible hasta que recibe el foco */
+.saltar {
+  position: absolute; left: 16px; top: -60px;
+  background: var(--color-lateral); color: #fff;
+  padding: 8px 14px; border-radius: 6px; z-index: 10;
+}
+.saltar:focus { top: 12px; }
+
+/* ---------- 3. CONTENEDOR (igual que la tarjeta del CV) ---------- */
+.lab-pagina {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: var(--color-tarjeta);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(20, 33, 61, 0.12);
+}
+
+/* ---------- 4. ENCABEZADO OSCURO ---------- */
+.lab-encabezado {
+  background: var(--color-lateral);
+  color: #e8ecf2;
+  padding: 28px 44px 36px;
+}
+.lab-nav {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+.lab-encabezado a { color: #e8ecf2; }
+.lab-encabezado a:focus-visible { outline-color: #fff; }
+.lab-etiqueta-tipo {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-acento);
+  font-weight: 600;
+}
+.lab-encabezado h1 { font-size: 34px; line-height: 1.2; margin: 4px 0 10px; }
+.lab-encabezado .resumen { max-width: 720px; font-size: 17px; }
+
+/* Etiquetas sobre fondo oscuro (como .etiqueta del CV) */
+.lab-encabezado .tec span {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #e8ecf2;
+  border-radius: 20px;
+  padding: 3px 10px;
+}
+.lab-enlaces { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+
+/* ---------- 5. CONTENIDO ---------- */
+.lab-contenido { padding: 12px 44px 44px; }
+
+.lab-contenido h2 {
+  font-size: 20px;
+  margin: 36px 0 18px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--color-acento);
+}
+.lab-contenido h3 { font-size: 17px; margin: 22px 0 8px; }
+.lab-contenido p, .lab-contenido li { font-size: 15px; }
+.lab-contenido p + p { margin-top: 10px; }
+.lab-contenido ul { padding-left: 20px; }
+.lab-contenido li { margin-bottom: 6px; }
+code {
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 0.9em;
+  background: #f0f2f5;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+/* Etiquetas de tecnologías (mismo estilo que .tec del CV) */
+.tec { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; }
+.tec span, .tec li {
+  font-size: 12px;
+  padding: 2px 9px;
+  border-radius: 4px;
+  background: var(--color-acento-bg);
+  color: var(--color-acento-osc);
+  margin: 0;
+}
+
+/* Botones */
+.boton {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 6px;
+  background: var(--color-acento-osc);
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+.boton:hover { background: #17564f; }
+.boton.secundario { background: transparent; border-color: rgba(255, 255, 255, 0.5); color: #fff; }
+.boton.secundario:hover { background: rgba(255, 255, 255, 0.1); }
+
+/* ---------- 6. TABLAS ---------- */
+.tabla-scroll { overflow-x: auto; }   /* en celular, la tabla se desliza de lado */
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+caption { text-align: left; font-size: 14px; color: var(--color-suave); margin-bottom: 8px; }
+th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--color-borde); }
+thead th { background: var(--color-acento-bg); color: var(--color-acento-osc); font-size: 13px; }
+tbody th { font-weight: 600; white-space: nowrap; }
+
+/* ---------- 7. DIAGRAMAS (Mermaid) ---------- */
+.diagrama {
+  border: 1px solid var(--color-borde);
+  border-radius: 10px;
+  padding: 16px;
+  margin: 8px 0 4px;
+  overflow-x: auto;
+}
+.diagrama pre.mermaid {
+  background: none;
+  font-family: var(--fuente);
+  text-align: center;
+  white-space: pre;
+  color: var(--color-suave);   /* si Mermaid no carga, se ve el código fuente */
+  font-size: 13px;
+}
+.diagrama svg { max-width: 100%; height: auto; }
+figcaption { font-size: 13px; color: var(--color-suave); margin-top: 6px; }
+
+/* ---------- 8. PASOS NUMERADOS (línea de tiempo como la del CV) ---------- */
+.pasos { list-style: none; padding: 0 !important; counter-reset: paso; }
+.pasos > li {
+  position: relative;
+  counter-increment: paso;
+  padding: 0 0 18px 44px;
+  margin: 0 !important;
+  border-left: 2px solid var(--color-borde);
+  margin-left: 14px !important;
+}
+.pasos > li:last-child { border-left-color: transparent; }
+.pasos > li::before {
+  content: counter(paso);
+  position: absolute;
+  left: -15px; top: -2px;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--color-acento-osc);
+  color: #fff;
+  font-size: 14px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.pasos strong { display: block; }
+.modo {
+  display: inline-block;
+  font-size: 12px;
+  padding: 0 8px;
+  border-radius: 20px;
+  background: #f0f2f5;
+  color: var(--color-suave);
+  margin-left: 4px;
+  font-weight: 400;
+}
+
+/* ---------- 9. TARJETAS DE RETOS ---------- */
+.retos { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; padding: 0 !important; list-style: none; }
+.retos > li {
+  border: 1px solid var(--color-borde);
+  border-top: 3px solid var(--color-acento);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 0 !important;
+}
+.retos h3 { margin: 0 0 6px; font-size: 16px; }
+
+/* ---------- 10. CELULARES ---------- */
+@media (max-width: 760px) {
+  body { padding: 0; }
+  .lab-pagina { border-radius: 0; }
+  .lab-encabezado { padding: 20px 22px 28px; }
+  .lab-encabezado h1 { font-size: 28px; }
+  .lab-contenido { padding: 4px 22px 32px; }
+}
+
+/* ---------- 11. IMPRESIÓN ---------- */
+@media print {
+  body { background: #fff; padding: 0; }
+  .lab-pagina { box-shadow: none; }
+  .lab-encabezado { background: #fff; color: var(--color-texto); padding: 0 0 12px; }
+  .lab-encabezado a, .lab-encabezado .tec span { color: var(--color-texto); }
+  .lab-nav, .lab-enlaces, .saltar { display: none; }
+  .lab-contenido { padding: 0; }
+  .diagrama, .retos > li, .pasos > li { break-inside: avoid; }
+}
+
+/* Respeta a quien prefiere menos animaciones */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* Párrafo de nota debajo de una tabla o diagrama */
+.lab-contenido .nota { margin-top: 14px; }

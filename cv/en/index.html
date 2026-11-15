@@ -198,6 +198,14 @@
       cursor: pointer;
     }
 
+    /* Tarjetas de Laboratorios: reusan .proyecto y agregan un botón al final.
+       El botón usa un verde más oscuro para que el texto blanco tenga buen contraste. */
+    .lab { display: flex; flex-direction: column; }
+    .lab .tec { margin-bottom: 14px; }
+    .lab .boton { margin-top: auto; align-self: flex-start; background: #1d6b62; }
+    .lab .boton:hover { background: #17564f; }
+    .lab .boton:focus-visible { outline: 3px solid var(--color-acento); outline-offset: 2px; }
+
     .solo-imprimir { display: none; }
     .idioma { font-size: 14px; margin: -12px 0 16px; }
 
@@ -385,6 +393,24 @@
           <p>Analysis of how vulnerable small and medium-sized businesses in Mexico are to cyberattacks.</p>
           <div class="tec"><span>Cybersecurity</span><span>Risk analysis</span><span>AI</span></div>
         </div>
+
+      </div>
+
+      <!-- ===================== LABORATORIOS (LABS) ===================== -->
+      <!--
+        Personal projects with their own detail page (in the labs/ folder).
+        Copia el mismo bloque que agregues en cv/es/index.html, traducido.
+      -->
+      <h2 id="labs">Labs</h2>
+      <div class="proyectos">
+
+        <article class="proyecto lab">
+          <h3>Trees in Space · TreeBot</h3>
+          <p class="meta">Personal project · 2022 – present</p>
+          <p>Bot and web portal for a Halo Infinite community: detects records from real matches and publishes per-player stats, automated with GitHub Actions.</p>
+          <div class="tec"><span>GitHub Actions</span><span>Python</span><span>Flask</span><span>Google Sheets</span><span>REST APIs</span><span>Render</span></div>
+          <a class="boton no-imprimir" href="labs/trees-in-space.html" aria-label="View Trees in Space details">View details →</a>
+        </article>
 
       </div>
     </section>

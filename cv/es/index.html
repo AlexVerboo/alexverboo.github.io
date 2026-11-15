@@ -198,6 +198,14 @@
       cursor: pointer;
     }
 
+    /* Tarjetas de Laboratorios: reusan .proyecto y agregan un botón al final.
+       El botón usa un verde más oscuro para que el texto blanco tenga buen contraste. */
+    .lab { display: flex; flex-direction: column; }
+    .lab .tec { margin-bottom: 14px; }
+    .lab .boton { margin-top: auto; align-self: flex-start; background: #1d6b62; }
+    .lab .boton:hover { background: #17564f; }
+    .lab .boton:focus-visible { outline: 3px solid var(--color-acento); outline-offset: 2px; }
+
     .solo-imprimir { display: none; }
     .idioma { font-size: 14px; margin: -12px 0 16px; }
     /* ---------- 6. CELULARES: una sola columna ---------- */
@@ -383,6 +391,26 @@
           <p>Análisis de la vulnerabilidad de pequeñas y medianas empresas en México frente a ciberataques.</p>
           <div class="tec"><span>Ciberseguridad</span><span>Análisis de riesgo</span><span>IA</span></div>
         </div>
+
+      </div>
+
+      <!-- ===================== LABORATORIOS ===================== -->
+      <!--
+        Proyectos personales con su propia página de detalle (en la carpeta labs/).
+        Para agregar uno: copia un bloque <article class="proyecto lab"> completo,
+        cambia los textos y el enlace del botón, y haz lo mismo en cv/en/index.html.
+        La página de detalle se crea copiando labs/trees-in-space.html (ver instrucciones dentro).
+      -->
+      <h2 id="laboratorios">Laboratorios</h2>
+      <div class="proyectos">
+
+        <article class="proyecto lab">
+          <h3>Trees in Space · TreeBot</h3>
+          <p class="meta">Proyecto personal · 2022 – actualidad</p>
+          <p>Bot y portal web para una comunidad de Halo Infinite: detecta récords en partidas reales y publica estadísticas por jugador, automatizado con GitHub Actions.</p>
+          <div class="tec"><span>GitHub Actions</span><span>Python</span><span>Flask</span><span>Google Sheets</span><span>APIs REST</span><span>Render</span></div>
+          <a class="boton no-imprimir" href="labs/trees-in-space.html" aria-label="Ver detalle de Trees in Space">Ver detalle →</a>
+        </article>
 
       </div>
     </section>
