@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<!--
+  Página de detalle de laboratorio. Basada en la plantilla trees-in-space.html
+  (ver instrucciones en ese archivo). Versión en inglés: cv/en/labs/data-storytelling.html
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>De los datos a la estrategia · Laboratorio de Alex Verboonen</title>
+  <meta name="description" content="Análisis de ventas y Data Storytelling para Numismática México: estacionalidad, concentración de ingresos por producto y por estado, y recomendaciones comerciales.">
+  <link rel="alternate" hreflang="es" href="https://alexverboo.github.io/cv/es/labs/data-storytelling.html">
+  <link rel="alternate" hreflang="en" href="https://alexverboo.github.io/cv/en/labs/data-storytelling.html">
+  <link rel="stylesheet" href="../../labs/labs.css">
+  <script type="module" src="../../labs/labs.js"></script>
+</head>
+
+<body>
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <div class="lab-pagina">
+
+    <!-- ===================== ENCABEZADO ===================== -->
+    <header class="lab-encabezado">
+      <nav class="lab-nav" aria-label="Navegación">
+        <a href="../#laboratorios">← Volver al CV</a>
+        <p class="idioma"><strong>Español</strong> · <a href="../../en/labs/data-storytelling.html" lang="en" hreflang="en">English</a></p>
+      </nav>
+
+      <p class="lab-etiqueta-tipo">Laboratorio · Tec de Monterrey</p>
+      <h1>De los datos a la estrategia: análisis de ventas y Data Storytelling</h1>
+      <p class="resumen">
+        Proyecto en equipo de la materia <strong>Visualización de Datos</strong> (mayo–junio de 2026). A partir del historial
+        de ventas de <strong>Numismática México</strong>, el equipo analizó cuándo, qué y dónde se vende, y convirtió esos
+        hallazgos en una presentación ejecutiva con recomendaciones de publicidad, inventario y enfoque geográfico.
+      </p>
+
+      <ul class="tec" aria-label="Habilidades y herramientas principales">
+        <li>Data Storytelling</li><li>Visualización de datos</li><li>KPI</li><li>Análisis exploratorio</li>
+        <li>PowerPoint</li><li>Gamma</li>
+      </ul>
+    </header>
+
+    <main id="contenido" class="lab-contenido">
+
+      <!-- ===================== MI PAPEL ===================== -->
+      <section aria-labelledby="papel">
+        <h2 id="papel">Mi papel</h2>
+        <div class="mi-papel">
+          <p>Armé la narrativa de Data Storytelling y la presentación ejecutiva final, y traduje los hallazgos del análisis
+          del equipo en recomendaciones de negocio concretas.</p>
+        </div>
+      </section>
+
+      <!-- ===================== PROBLEMA ===================== -->
+      <section aria-labelledby="problema">
+        <h2 id="problema">El reto</h2>
+        <p>Numismática México quería entender mejor su comportamiento comercial para orientar sus decisiones. El análisis
+        respondió cinco preguntas:</p>
+        <ul>
+          <li>¿Cuándo se producen los principales aumentos de ventas?</li>
+          <li>¿Qué productos aportan la mayor parte de los ingresos?</li>
+          <li>¿En qué regiones se concentra la demanda?</li>
+          <li>¿Cómo aprovechar la estacionalidad con campañas publicitarias?</li>
+          <li>¿Dónde conviene concentrar los esfuerzos comerciales?</li>
+        </ul>
+        <p>Los datos fueron el historial de ventas del caso (fechas, ingresos, productos y regiones), con foco en 2021 y 2022.</p>
+      </section>
+
+      <!-- ===================== HALLAZGOS ===================== -->
+      <section aria-labelledby="hallazgos">
+        <h2 id="hallazgos">Hallazgos clave</h2>
+        <ul class="kpis">
+          <li><span class="cifra">64%</span><span class="detalle">de los ingresos viene de solo <strong>3 productos</strong>.</span></li>
+          <li><span class="cifra">53%</span><span class="detalle">de las ventas se concentra en <strong>4 estados</strong>: Estado de México, CDMX, Jalisco y Veracruz.</span></li>
+          <li><span class="cifra">50%</span><span class="detalle">de las ventas de 2022 se logró con <strong>publicidad</strong>.</span></li>
+        </ul>
+        <p class="nota">Además, se detectó una oportunidad clara en noviembre y diciembre, con margen de mejora en el Buen Fin.
+        Las cifras son las reportadas en el entregable académico; no provienen de una campaña experimental validada.</p>
+      </section>
+
+      <!-- ===================== DE HALLAZGOS A ESTRATEGIA ===================== -->
+      <section aria-labelledby="estrategia">
+        <h2 id="estrategia">De los hallazgos a la estrategia</h2>
+        <figure class="diagrama">
+<pre class="mermaid">
+flowchart LR
+    accTitle: De los datos a la estrategia
+    accDescr: Los datos históricos de ventas se analizan por tiempo, producto y geografía. Cada análisis produce un hallazgo que se convierte en una recomendación de negocio.
+    D[(Historial de ventas)] --> T[Análisis temporal]
+    D --> P[Análisis por producto]
+    D --> G[Análisis geográfico]
+    T --> H1["Picos en nov-dic y Buen Fin"]
+    P --> H2["64% de ingresos en 3 productos"]
+    G --> H3["53% de ventas en 4 estados"]
+    H1 --> R1["Reforzar publicidad e inventario por temporada"]
+    H2 --> R2["Enfocar campañas en productos clave"]
+    H3 --> R3["Priorizar los 4 estados principales"]
+</pre>
+          <figcaption>Figura 1. Cada hallazgo se conecta con una decisión de negocio.</figcaption>
+        </figure>
+
+        <h3>Recomendaciones</h3>
+        <ul>
+          <li>Concentrar las campañas publicitarias en los productos que más aportan a los ingresos.</li>
+          <li>Priorizar los cuatro estados con mayor concentración de ventas.</li>
+          <li>Aumentar la publicidad durante el Buen Fin y la última semana antes de Navidad.</li>
+          <li>Planear el inventario según los patrones históricos de demanda.</li>
+          <li>Medir el impacto de las campañas contra una referencia de ventas orgánicas y vigilar la posible canibalización entre ambas.</li>
+        </ul>
+      </section>
+
+      <!-- ===================== PROCESO ===================== -->
+      <section aria-labelledby="proceso">
+        <h2 id="proceso">Proceso</h2>
+        <ol class="pasos">
+          <li><strong>Preguntas de negocio</strong>Identificar las necesidades comerciales y formular las preguntas del análisis.</li>
+          <li><strong>Exploración y KPI</strong>Revisar el historial de ventas y elegir indicadores de ingresos, tiempo, producto y geografía.</li>
+          <li><strong>Análisis</strong>Tendencias y estacionalidad, concentración de ingresos por producto y distribución por estado.</li>
+          <li><strong>Interpretación</strong>Convertir cada hallazgo en una oportunidad comercial.</li>
+          <li><strong>Data Storytelling</strong>Construir una narrativa ejecutiva que lleve del dato a la decisión, con base en los principios de <em>Storytelling with Data</em> (Cole Nussbaumer Knaflic).</li>
+        </ol>
+      </section>
+
+      <!-- ===================== LO QUE DEMUESTRA ===================== -->
+      <section aria-labelledby="demuestra">
+        <h2 id="demuestra">Lo que demuestra</h2>
+        <ul>
+          <li><strong>Data Storytelling:</strong> transformar resultados analíticos en una narrativa ejecutiva que conecta evidencia, contexto y decisiones.</li>
+          <li><strong>Visión de negocio:</strong> traducir porcentajes en acciones concretas de marketing, inventario y cobertura geográfica.</li>
+          <li><strong>Comunicación con directivos:</strong> presentar hallazgos de forma clara para quien decide, no para quien analiza.</li>
+          <li><strong>Pensamiento analítico:</strong> cuestionar los patrones (por ejemplo, ventas orgánicas contra ventas por publicidad) antes de recomendar.</li>
+        </ul>
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!--
+  Lab detail page. Based on the trees-in-space.html template
+  (see instructions in cv/es/labs/trees-in-space.html). Spanish version: cv/es/labs/customer-churn.html
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Churn Prediction · Alex Verboonen's Lab</title>
+  <meta name="description" content="Comparison of five Machine Learning models in SAS Viya to predict customer churn. Gradient Boosting: 91.1% accuracy and 0.919 ROC AUC.">
+  <link rel="alternate" hreflang="es" href="https://alexverboo.github.io/cv/es/labs/customer-churn.html">
+  <link rel="alternate" hreflang="en" href="https://alexverboo.github.io/cv/en/labs/customer-churn.html">
+  <link rel="stylesheet" href="../../labs/labs.css">
+  <script type="module" src="../../labs/labs.js"></script>
+</head>
+
+<body>
+  <a class="saltar" href="#contenido">Skip to content</a>
+
+  <div class="lab-pagina">
+
+    <!-- ===================== HEADER ===================== -->
+    <header class="lab-encabezado">
+      <nav class="lab-nav" aria-label="Navigation">
+        <a href="../#labs">← Back to CV</a>
+        <p class="idioma"><a href="../../es/labs/customer-churn.html" lang="es" hreflang="es">Español</a> · <strong>English</strong></p>
+      </nav>
+
+      <p class="lab-etiqueta-tipo">Lab · Tecnológico de Monterrey</p>
+      <h1>Customer Churn Prediction with Machine Learning</h1>
+      <p class="resumen">
+        Academic case study for <strong>TI5048 – Machine Learning for Decision Making</strong>
+        (August 2026, team project). Using a dataset of 50,000 customers from the fictional company RetailGenix,
+        five classification algorithms were trained and compared in SAS Model Studio to spot customers at risk of
+        leaving before they do. The winning model, Gradient Boosting, reached 91.1% accuracy.
+      </p>
+
+      <ul class="tec" aria-label="Main technologies">
+        <li>SAS Viya</li><li>SAS Model Studio</li><li>Gradient Boosting</li><li>Random Forest</li>
+        <li>Classification</li><li>CRISP-DM</li>
+      </ul>
+    </header>
+
+    <main id="contenido" class="lab-contenido">
+
+      <!-- ===================== MY ROLE ===================== -->
+      <section aria-labelledby="papel">
+        <h2 id="papel">My role</h2>
+        <div class="mi-papel">
+          <p>I built the pipeline in SAS Model Studio and configured the models. I then analyzed and compared the results
+          to choose the champion model, and coordinated the integration of the team's final deliverable.</p>
+        </div>
+      </section>
+
+      <!-- ===================== PROBLEM ===================== -->
+      <section aria-labelledby="problema">
+        <h2 id="problema">Problem and data</h2>
+        <p>
+          Losing customers is expensive: revenue goes away, and acquiring new customers costs more than keeping current ones.
+          The case question was: <strong>can we identify which customers will leave before it happens?</strong>
+        </p>
+        <div class="tabla-scroll">
+          <table>
+            <thead><tr><th scope="col">Feature</th><th scope="col">Detail</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Records</th><td>50,000 customers</td></tr>
+              <tr><th scope="row">Variables</th><td>25 (demographic, financial and purchasing behavior)</td></tr>
+              <tr><th scope="row">Target variable</th><td><code>Churned</code> (binary classification)</td></tr>
+              <tr><th scope="row">Distribution</th><td>28.9% churned (14,450) · 71.1% stayed (35,550)</td></tr>
+              <tr><th scope="row">Source</th><td>Dataset provided for the course activity (not real customers)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===================== PIPELINE ===================== -->
+      <section aria-labelledby="pipeline">
+        <h2 id="pipeline">Machine Learning pipeline</h2>
+        <figure class="diagrama">
+<pre class="mermaid">
+flowchart LR
+    accTitle: Machine Learning pipeline
+    accDescr: The customer dataset goes through data preparation and variable configuration; five models are then trained in parallel, compared, and Gradient Boosting is selected as the champion model.
+    D[(Customer dataset)] --> P[Data preparation]
+    P --> V["Variable setup (target: Churned)"]
+    V --> LR[Logistic regression]
+    V --> DT[Decision tree]
+    V --> RF[Random Forest]
+    V --> SVM[SVM]
+    V --> GB[Gradient Boosting]
+    LR --> C[Model comparison]
+    DT --> C
+    RF --> C
+    SVM --> C
+    GB --> C
+    C --> W["Champion model: Gradient Boosting"]
+</pre>
+          <figcaption>Figure 1. Flow built in SAS Model Studio: all five models are trained on the same data under the same conditions.</figcaption>
+        </figure>
+
+        <h3>Process (CRISP-DM)</h3>
+        <ol class="pasos">
+          <li><strong>Business understanding</strong>Framing churn as a supervised classification problem.</li>
+          <li><strong>Data exploration and preparation</strong>CSV import, metadata setup, <code>Churned</code> as the target, and class-balance review.</li>
+          <li><strong>Modeling</strong>Pipeline construction and training of five algorithms under the same experimental conditions.</li>
+          <li><strong>Evaluation</strong>Comparison by accuracy, ROC AUC, KS statistic and misclassification rate, plus ROC and Lift curves.</li>
+          <li><strong>Selection and recommendations</strong>Gradient Boosting chosen as the champion model, with a proposal for using it in retention campaigns.</li>
+        </ol>
+      </section>
+
+      <!-- ===================== RESULTS ===================== -->
+      <section aria-labelledby="resultados">
+        <h2 id="resultados">Results</h2>
+
+        <h3>Test-set accuracy</h3>
+        <ul class="barras" aria-label="Accuracy by model">
+          <li class="destacada"><span>Gradient Boosting</span><span class="pista"><span class="barra" style="--valor: 91.1"></span></span><span class="valor">91.10%</span></li>
+          <li><span>Random Forest</span><span class="pista"><span class="barra" style="--valor: 89.74"></span></span><span class="valor">89.74%</span></li>
+          <li><span>Decision tree</span><span class="pista"><span class="barra" style="--valor: 85.64"></span></span><span class="valor">85.64%</span></li>
+          <li><span>SVM</span><span class="pista"><span class="barra" style="--valor: 77.3"></span></span><span class="valor">77.30%</span></li>
+          <li><span>Logistic regression</span><span class="pista"><span class="barra" style="--valor: 74.78"></span></span><span class="valor">74.78%</span></li>
+        </ul>
+
+        <div class="tabla-scroll">
+          <table>
+            <caption>Full model comparison (test set)</caption>
+            <thead>
+              <tr><th scope="col">Model</th><th scope="col">Accuracy</th><th scope="col">ROC AUC</th><th scope="col">KS</th><th scope="col">Error rate</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Gradient Boosting ★</th><td>91.10%</td><td>0.9194</td><td>0.7664</td><td>8.90%</td></tr>
+              <tr><th scope="row">Random Forest</th><td>89.74%</td><td>0.9124</td><td>0.7345</td><td>10.26%</td></tr>
+              <tr><th scope="row">Decision tree</th><td>85.64%</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><th scope="row">SVM</th><td>77.30%</td><td>0.7864</td><td>—</td><td>—</td></tr>
+              <tr><th scope="row">Logistic regression</th><td>74.78%</td><td>0.7147</td><td>0.2978</td><td>25.22%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="nota">— = metric not reported in the deliverable.</p>
+
+        <h3>Conclusions</h3>
+        <ul>
+          <li>Ensemble models (Gradient Boosting and Random Forest) clearly outperformed the single models.</li>
+          <li>Gradient Boosting was best on all four metrics and the strongest at separating customers who leave from those who stay; ROC and Lift curves confirmed it.</li>
+          <li>With these predictions, the company can focus retention campaigns on its highest-risk customers and spend its resources more effectively.</li>
+        </ul>
+      </section>
+
+      <!-- ===================== SCOPE ===================== -->
+      <section aria-labelledby="alcance">
+        <h2 id="alcance">Scope and limitations</h2>
+        <p>This is an academic predictive model, not a production solution. It used a single dataset with one
+        train/validation/test split, no cross-validation, and the economic impact of the predictions was not measured.
+        Natural next steps would be adding cross-validation, tuning hyperparameters and estimating the return of a
+        retention campaign.</p>
+      </section>
+
+      <!-- ===================== WHAT IT SHOWS ===================== -->
+      <section aria-labelledby="demuestra">
+        <h2 id="demuestra">What it shows</h2>
+        <ul>
+          <li><strong>Predictive modeling:</strong> building supervised classification models from historical data.</li>
+          <li><strong>Model evaluation and selection:</strong> comparing five algorithms across several metrics to choose based on evidence, not intuition.</li>
+          <li><strong>Data preparation:</strong> defining the target variable, configuring metadata and analyzing class balance.</li>
+          <li><strong>From business to analytics:</strong> turning a business problem into a measurable one and translating results into recommendations.</li>
+          <li><strong>Technical coordination:</strong> integrating a team's work into a single technical report.</li>
+        </ul>
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>

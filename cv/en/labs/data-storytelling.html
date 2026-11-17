@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<!--
+  Lab detail page. Based on the trees-in-space.html template
+  (see instructions in cv/es/labs/trees-in-space.html). Spanish version: cv/es/labs/data-storytelling.html
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>From Data to Strategy · Alex Verboonen's Lab</title>
+  <meta name="description" content="Sales analytics and data storytelling for Numismática México: seasonality, revenue concentration by product and state, and business recommendations.">
+  <link rel="alternate" hreflang="es" href="https://alexverboo.github.io/cv/es/labs/data-storytelling.html">
+  <link rel="alternate" hreflang="en" href="https://alexverboo.github.io/cv/en/labs/data-storytelling.html">
+  <link rel="stylesheet" href="../../labs/labs.css">
+  <script type="module" src="../../labs/labs.js"></script>
+</head>
+
+<body>
+  <a class="saltar" href="#contenido">Skip to content</a>
+
+  <div class="lab-pagina">
+
+    <!-- ===================== HEADER ===================== -->
+    <header class="lab-encabezado">
+      <nav class="lab-nav" aria-label="Navigation">
+        <a href="../#labs">← Back to CV</a>
+        <p class="idioma"><a href="../../es/labs/data-storytelling.html" lang="es" hreflang="es">Español</a> · <strong>English</strong></p>
+      </nav>
+
+      <p class="lab-etiqueta-tipo">Lab · Tecnológico de Monterrey</p>
+      <h1>From Data to Strategy: Sales Analytics &amp; Data Storytelling</h1>
+      <p class="resumen">
+        Team project for the <strong>Data Visualization</strong> course (May–June 2026). Using the sales history of
+        <strong>Numismática México</strong>, the team analyzed when, what and where the company sells, and turned those
+        findings into an executive presentation with recommendations on advertising, inventory and geographic focus.
+      </p>
+
+      <ul class="tec" aria-label="Main skills and tools">
+        <li>Data Storytelling</li><li>Data Visualization</li><li>KPIs</li><li>Exploratory Analysis</li>
+        <li>PowerPoint</li><li>Gamma</li>
+      </ul>
+    </header>
+
+    <main id="contenido" class="lab-contenido">
+
+      <!-- ===================== MY ROLE ===================== -->
+      <section aria-labelledby="papel">
+        <h2 id="papel">My role</h2>
+        <div class="mi-papel">
+          <p>I built the data storytelling narrative and the final executive presentation, and translated the team's
+          analytical findings into concrete business recommendations.</p>
+        </div>
+      </section>
+
+      <!-- ===================== CHALLENGE ===================== -->
+      <section aria-labelledby="problema">
+        <h2 id="problema">The challenge</h2>
+        <p>Numismática México wanted a clearer view of its sales behavior to guide business decisions. The analysis
+        answered five questions:</p>
+        <ul>
+          <li>When do the main sales increases happen?</li>
+          <li>Which products bring in most of the revenue?</li>
+          <li>Where is demand concentrated geographically?</li>
+          <li>How can seasonality be leveraged with advertising campaigns?</li>
+          <li>Where should commercial efforts be focused?</li>
+        </ul>
+        <p>The data was the case's historical sales records (dates, revenue, products and regions), focused on 2021 and 2022.</p>
+      </section>
+
+      <!-- ===================== FINDINGS ===================== -->
+      <section aria-labelledby="hallazgos">
+        <h2 id="hallazgos">Key findings</h2>
+        <ul class="kpis">
+          <li><span class="cifra">64%</span><span class="detalle">of revenue comes from just <strong>3 products</strong>.</span></li>
+          <li><span class="cifra">53%</span><span class="detalle">of sales are concentrated in <strong>4 states</strong>: State of Mexico, Mexico City, Jalisco and Veracruz.</span></li>
+          <li><span class="cifra">50%</span><span class="detalle">of 2022 sales were driven by <strong>advertising</strong>.</span></li>
+        </ul>
+        <p class="nota">A clear opportunity was also found in November and December, with room to improve during Buen Fin
+        (Mexico's main shopping weekend). Figures are those reported in the academic deliverable, not results from a validated experiment.</p>
+      </section>
+
+      <!-- ===================== FROM FINDINGS TO STRATEGY ===================== -->
+      <section aria-labelledby="estrategia">
+        <h2 id="estrategia">From findings to strategy</h2>
+        <figure class="diagrama">
+<pre class="mermaid">
+flowchart LR
+    accTitle: From data to strategy
+    accDescr: Historical sales data is analyzed by time, product and geography. Each analysis produces a finding that becomes a business recommendation.
+    D[(Sales history)] --> T[Time analysis]
+    D --> P[Product analysis]
+    D --> G[Geographic analysis]
+    T --> H1["Peaks in Nov-Dec and Buen Fin"]
+    P --> H2["64% of revenue from 3 products"]
+    G --> H3["53% of sales in 4 states"]
+    H1 --> R1["Boost seasonal ads and inventory"]
+    H2 --> R2["Focus campaigns on key products"]
+    H3 --> R3["Prioritize the top 4 states"]
+</pre>
+          <figcaption>Figure 1. Each finding connects to a business decision.</figcaption>
+        </figure>
+
+        <h3>Recommendations</h3>
+        <ul>
+          <li>Focus advertising campaigns on the products that contribute most to revenue.</li>
+          <li>Prioritize the four states with the highest sales concentration.</li>
+          <li>Increase advertising during Buen Fin and the last week before Christmas.</li>
+          <li>Plan inventory according to historical demand patterns.</li>
+          <li>Measure campaign impact against an organic-sales baseline and watch for cannibalization between the two.</li>
+        </ul>
+      </section>
+
+      <!-- ===================== PROCESS ===================== -->
+      <section aria-labelledby="proceso">
+        <h2 id="proceso">Process</h2>
+        <ol class="pasos">
+          <li><strong>Business questions</strong>Identify commercial needs and frame the analysis questions.</li>
+          <li><strong>Exploration and KPIs</strong>Review the sales history and choose revenue, time, product and geography indicators.</li>
+          <li><strong>Analysis</strong>Trends and seasonality, revenue concentration by product, and distribution by state.</li>
+          <li><strong>Interpretation</strong>Turn each finding into a business opportunity.</li>
+          <li><strong>Data storytelling</strong>Build an executive narrative that leads from data to decision, based on the principles of <em>Storytelling with Data</em> (Cole Nussbaumer Knaflic).</li>
+        </ol>
+      </section>
+
+      <!-- ===================== WHAT IT SHOWS ===================== -->
+      <section aria-labelledby="demuestra">
+        <h2 id="demuestra">What it shows</h2>
+        <ul>
+          <li><strong>Data storytelling:</strong> turning analytical results into an executive narrative that connects evidence, context and decisions.</li>
+          <li><strong>Business sense:</strong> translating percentages into concrete marketing, inventory and geographic actions.</li>
+          <li><strong>Executive communication:</strong> presenting findings clearly for decision-makers, not just analysts.</li>
+          <li><strong>Analytical thinking:</strong> questioning patterns (for example, organic vs. ad-driven sales) before recommending.</li>
+        </ul>
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>

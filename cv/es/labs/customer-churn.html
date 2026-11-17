@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!--
+  Página de detalle de laboratorio. Basada en la plantilla trees-in-space.html
+  (ver instrucciones en ese archivo). Versión en inglés: cv/en/labs/customer-churn.html
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Predicción de abandono de clientes · Laboratorio de Alex Verboonen</title>
+  <meta name="description" content="Comparación de cinco modelos de Machine Learning en SAS Viya para anticipar el abandono de clientes. Gradient Boosting: 91.1% de accuracy y ROC AUC de 0.919.">
+  <link rel="alternate" hreflang="es" href="https://alexverboo.github.io/cv/es/labs/customer-churn.html">
+  <link rel="alternate" hreflang="en" href="https://alexverboo.github.io/cv/en/labs/customer-churn.html">
+  <link rel="stylesheet" href="../../labs/labs.css">
+  <script type="module" src="../../labs/labs.js"></script>
+</head>
+
+<body>
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <div class="lab-pagina">
+
+    <!-- ===================== ENCABEZADO ===================== -->
+    <header class="lab-encabezado">
+      <nav class="lab-nav" aria-label="Navegación">
+        <a href="../#laboratorios">← Volver al CV</a>
+        <p class="idioma"><strong>Español</strong> · <a href="../../en/labs/customer-churn.html" lang="en" hreflang="en">English</a></p>
+      </nav>
+
+      <p class="lab-etiqueta-tipo">Laboratorio · Tec de Monterrey</p>
+      <h1>Predicción de abandono de clientes con Machine Learning</h1>
+      <p class="resumen">
+        Caso de estudio académico de la materia <strong>TI5048 – Aprendizaje de Máquina para la Toma de Decisiones</strong>
+        (agosto de 2026, trabajo en equipo). Con un conjunto de datos de 50,000 clientes de la empresa ficticia RetailGenix,
+        se entrenaron y compararon cinco algoritmos de clasificación en SAS Model Studio para detectar a tiempo qué clientes
+        están en riesgo de abandonar. El modelo ganador, Gradient Boosting, alcanzó un 91.1% de exactitud.
+      </p>
+
+      <ul class="tec" aria-label="Tecnologías principales">
+        <li>SAS Viya</li><li>SAS Model Studio</li><li>Gradient Boosting</li><li>Random Forest</li>
+        <li>Clasificación</li><li>CRISP-DM</li>
+      </ul>
+    </header>
+
+    <main id="contenido" class="lab-contenido">
+
+      <!-- ===================== MI PAPEL ===================== -->
+      <section aria-labelledby="papel">
+        <h2 id="papel">Mi papel</h2>
+        <div class="mi-papel">
+          <p>Construí el pipeline en SAS Model Studio y configuré los modelos. Después analicé y comparé los resultados
+          para elegir el modelo campeón, y coordiné la integración de la entrega final del equipo.</p>
+        </div>
+      </section>
+
+      <!-- ===================== PROBLEMA ===================== -->
+      <section aria-labelledby="problema">
+        <h2 id="problema">Problema y datos</h2>
+        <p>
+          Perder clientes cuesta caro: se pierden ingresos y conseguir clientes nuevos sale más caro que retener a los actuales.
+          La pregunta del caso era: <strong>¿podemos identificar qué clientes van a abandonar la empresa antes de que ocurra?</strong>
+        </p>
+        <div class="tabla-scroll">
+          <table>
+            <thead><tr><th scope="col">Característica</th><th scope="col">Detalle</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Registros</th><td>50,000 clientes</td></tr>
+              <tr><th scope="row">Variables</th><td>25 (demográficas, financieras y de comportamiento de compra)</td></tr>
+              <tr><th scope="row">Variable objetivo</th><td><code>Churned</code> (clasificación binaria)</td></tr>
+              <tr><th scope="row">Distribución</th><td>28.9% abandonó (14,450) · 71.1% permaneció (35,550)</td></tr>
+              <tr><th scope="row">Origen</th><td>Dataset proporcionado para la actividad académica (no son clientes reales)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===================== PIPELINE ===================== -->
+      <section aria-labelledby="pipeline">
+        <h2 id="pipeline">Pipeline de Machine Learning</h2>
+        <figure class="diagrama">
+<pre class="mermaid">
+flowchart LR
+    accTitle: Pipeline de Machine Learning
+    accDescr: El dataset de clientes pasa por preparación de datos y configuración de variables; después se entrenan cinco modelos en paralelo, se comparan y se selecciona Gradient Boosting como modelo campeón.
+    D[(Dataset de clientes)] --> P[Preparación de datos]
+    P --> V["Configuración de variables (objetivo: Churned)"]
+    V --> LR[Regresión logística]
+    V --> DT[Árbol de decisión]
+    V --> RF[Random Forest]
+    V --> SVM[SVM]
+    V --> GB[Gradient Boosting]
+    LR --> C[Comparación de modelos]
+    DT --> C
+    RF --> C
+    SVM --> C
+    GB --> C
+    C --> W["Modelo campeón: Gradient Boosting"]
+</pre>
+          <figcaption>Figura 1. Flujo construido en SAS Model Studio: los cinco modelos se entrenan con los mismos datos y condiciones.</figcaption>
+        </figure>
+
+        <h3>Proceso (CRISP-DM)</h3>
+        <ol class="pasos">
+          <li><strong>Comprensión del problema</strong>Planteamiento del abandono como un problema de clasificación supervisada.</li>
+          <li><strong>Exploración y preparación</strong>Importación del CSV, configuración de metadatos, definición de <code>Churned</code> como objetivo y revisión del balance de clases.</li>
+          <li><strong>Modelado</strong>Construcción del pipeline y entrenamiento de cinco algoritmos bajo las mismas condiciones experimentales.</li>
+          <li><strong>Evaluación</strong>Comparación con Accuracy, ROC AUC, estadístico KS y tasa de error, además de curvas ROC y Lift.</li>
+          <li><strong>Selección y recomendaciones</strong>Elección de Gradient Boosting como modelo campeón y propuesta de uso para campañas de retención.</li>
+        </ol>
+      </section>
+
+      <!-- ===================== RESULTADOS ===================== -->
+      <section aria-labelledby="resultados">
+        <h2 id="resultados">Resultados</h2>
+
+        <h3>Accuracy en el conjunto de prueba</h3>
+        <ul class="barras" aria-label="Accuracy por modelo">
+          <li class="destacada"><span>Gradient Boosting</span><span class="pista"><span class="barra" style="--valor: 91.1"></span></span><span class="valor">91.10%</span></li>
+          <li><span>Random Forest</span><span class="pista"><span class="barra" style="--valor: 89.74"></span></span><span class="valor">89.74%</span></li>
+          <li><span>Árbol de decisión</span><span class="pista"><span class="barra" style="--valor: 85.64"></span></span><span class="valor">85.64%</span></li>
+          <li><span>SVM</span><span class="pista"><span class="barra" style="--valor: 77.3"></span></span><span class="valor">77.30%</span></li>
+          <li><span>Regresión logística</span><span class="pista"><span class="barra" style="--valor: 74.78"></span></span><span class="valor">74.78%</span></li>
+        </ul>
+
+        <div class="tabla-scroll">
+          <table>
+            <caption>Comparación completa de modelos (conjunto de prueba)</caption>
+            <thead>
+              <tr><th scope="col">Modelo</th><th scope="col">Accuracy</th><th scope="col">ROC AUC</th><th scope="col">KS</th><th scope="col">Tasa de error</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Gradient Boosting ★</th><td>91.10%</td><td>0.9194</td><td>0.7664</td><td>8.90%</td></tr>
+              <tr><th scope="row">Random Forest</th><td>89.74%</td><td>0.9124</td><td>0.7345</td><td>10.26%</td></tr>
+              <tr><th scope="row">Árbol de decisión</th><td>85.64%</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><th scope="row">SVM</th><td>77.30%</td><td>0.7864</td><td>—</td><td>—</td></tr>
+              <tr><th scope="row">Regresión logística</th><td>74.78%</td><td>0.7147</td><td>0.2978</td><td>25.22%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="nota">— = métrica no reportada en el entregable.</p>
+
+        <h3>Conclusiones</h3>
+        <ul>
+          <li>Los modelos de ensamble (Gradient Boosting y Random Forest) superaron con claridad a los modelos individuales.</li>
+          <li>Gradient Boosting fue el mejor en las cuatro métricas y el que mejor distingue entre clientes que se van y los que se quedan; las curvas ROC y Lift lo confirmaron.</li>
+          <li>Con estas predicciones, la empresa puede priorizar sus campañas de retención en los clientes con mayor riesgo y gastar mejor sus recursos.</li>
+        </ul>
+      </section>
+
+      <!-- ===================== ALCANCE ===================== -->
+      <section aria-labelledby="alcance">
+        <h2 id="alcance">Alcance y limitaciones</h2>
+        <p>Es un modelo predictivo académico, no una solución en producción. Se usó un solo conjunto de datos con una partición
+        de entrenamiento, validación y prueba, sin validación cruzada, y no se midió el impacto económico de las predicciones.
+        Los siguientes pasos naturales serían agregar validación cruzada, ajustar hiperparámetros y estimar el retorno de una
+        campaña de retención.</p>
+      </section>
+
+      <!-- ===================== LO QUE DEMUESTRA ===================== -->
+      <section aria-labelledby="demuestra">
+        <h2 id="demuestra">Lo que demuestra</h2>
+        <ul>
+          <li><strong>Modelado predictivo:</strong> construcción de modelos de clasificación supervisada a partir de datos históricos.</li>
+          <li><strong>Evaluación y selección de modelos:</strong> comparación de cinco algoritmos con varias métricas para elegir con evidencia, no por intuición.</li>
+          <li><strong>Preparación de datos:</strong> definición de la variable objetivo, configuración de metadatos y análisis del balance de clases.</li>
+          <li><strong>Del negocio al análisis:</strong> convertir un problema comercial en uno medible y traducir los resultados en recomendaciones.</li>
+          <li><strong>Coordinación técnica:</strong> integración del trabajo de un equipo en un informe técnico único.</li>
+        </ul>
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>
