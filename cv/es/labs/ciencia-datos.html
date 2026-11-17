@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<!--
+  Página de detalle de laboratorio. Basada en la plantilla trees-in-space.html
+  (ver instrucciones en ese archivo). Versión en inglés: cv/en/labs/ciencia-datos.html
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Del dato crudo al modelo · Laboratorio de Alex Verboonen</title>
+  <meta name="description" content="Ocho laboratorios en Python que recorren el ciclo completo de ciencia de datos: pandas, SQL, EDA, preprocesamiento, PCA y modelos de regresión. R² de 0.963 y 97.4% de accuracy.">
+  <link rel="alternate" hreflang="es" href="https://alexverboo.github.io/cv/es/labs/ciencia-datos.html">
+  <link rel="alternate" hreflang="en" href="https://alexverboo.github.io/cv/en/labs/ciencia-datos.html">
+  <link rel="stylesheet" href="../../labs/labs.css">
+  <script type="module" src="../../labs/labs.js"></script>
+</head>
+
+<body>
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <div class="lab-pagina">
+
+    <!-- ===================== ENCABEZADO ===================== -->
+    <header class="lab-encabezado">
+      <nav class="lab-nav" aria-label="Navegación">
+        <a href="../#laboratorios">← Volver al CV</a>
+        <p class="idioma"><strong>Español</strong> · <a href="../../en/labs/ciencia-datos.html" lang="en" hreflang="en">English</a></p>
+      </nav>
+
+      <p class="lab-etiqueta-tipo">Laboratorio · Maestría en IA Aplicada · Tec de Monterrey</p>
+      <h1>Del dato crudo al modelo: pipeline completo de ciencia de datos en Python</h1>
+      <p class="resumen">
+        Serie de ocho laboratorios de la <strong>Maestría en Inteligencia Artificial Aplicada</strong> del Tec de Monterrey, materia
+        <strong>TC5053 – Ciencia y analítica de datos</strong> (abril a julio de 2026). Cada uno resuelve un problema distinto con un
+        conjunto de datos público y, en conjunto, recorren el ciclo completo: extracción con pandas y SQL, análisis exploratorio,
+        preprocesamiento, ingeniería de características, reducción de dimensionalidad y modelos de regresión construidos como
+        pipelines de scikit-learn. Los mejores modelos lograron un R² de 0.963 al predecir precios de diamantes y 97.4% de
+        exactitud al clasificar tumores, sin falsos positivos.
+      </p>
+
+      <ul class="tec" aria-label="Tecnologías principales">
+        <li>Python</li><li>pandas</li><li>scikit-learn</li><li>SQL (MySQL)</li>
+        <li>PCA</li><li>Jupyter</li>
+      </ul>
+    </header>
+
+    <main id="contenido" class="lab-contenido">
+
+      <!-- ===================== MI PAPEL ===================== -->
+      <section aria-labelledby="papel">
+        <h2 id="papel">Mi papel</h2>
+        <div class="mi-papel">
+          <p>Hice de forma individual los laboratorios de pandas, SQL, análisis exploratorio y preprocesamiento (1 a 4).
+          Los de ingeniería de características, PCA y regresión (5 a 8) los desarrollé en un equipo de tres personas;
+          el de PCA se entregó desde mi repositorio. Todos obtuvieron la calificación máxima.</p>
+        </div>
+      </section>
+
+      <!-- ===================== PROBLEMAS ===================== -->
+      <section aria-labelledby="problema">
+        <h2 id="problema">Problemas y datos</h2>
+        <p>Cada laboratorio practica una etapa del ciclo con un conjunto de datos público distinto:</p>
+        <div class="tabla-scroll">
+          <table>
+            <thead><tr><th scope="col">Laboratorio</th><th scope="col">Tema</th><th scope="col">Datos</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">1</th><td>Análisis de datos con pandas</td><td>Clima de 2020 de una estación del Instituto Max Planck (Kaggle)</td></tr>
+              <tr><th scope="row">2</th><td>Acceso a bases de datos y SQL</td><td>Base relacional de participación y top 10 de Netflix (MySQL)</td></tr>
+              <tr><th scope="row">3</th><td>Análisis exploratorio (EDA)</td><td>Clientes bancarios y préstamos personales (Kaggle)</td></tr>
+              <tr><th scope="row">4</th><td>Preprocesamiento</td><td>Pacientes con enfermedad cardíaca (Kaggle)</td></tr>
+              <tr><th scope="row">5</th><td>Ingeniería de características</td><td>Especificaciones y precios de computadoras (Kaggle)</td></tr>
+              <tr><th scope="row">6</th><td>Reducción de dimensionalidad (PCA)</td><td>Especificaciones de automóviles (UCI)</td></tr>
+              <tr><th scope="row">7</th><td>Regresión lineal</td><td>Precios de diamantes (ggplot2)</td></tr>
+              <tr><th scope="row">8</th><td>Regresión logística</td><td>Tumores mamarios (UCI)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===================== PIPELINE ===================== -->
+      <section aria-labelledby="pipeline">
+        <h2 id="pipeline">El ciclo de ciencia de datos</h2>
+        <figure class="diagrama">
+<pre class="mermaid">
+flowchart LR
+    accTitle: Ciclo de ciencia de datos
+    accDescr: Los datos se extraen de archivos CSV y de una base MySQL, pasan por análisis exploratorio, preprocesamiento, ingeniería de características y PCA, y terminan en modelos de regresión lineal y logística evaluados con métricas.
+    A[(CSV y MySQL)] --> B[Extracción con pandas y SQL]
+    B --> C[Análisis exploratorio]
+    C --> D[Preprocesamiento]
+    D --> E[Ingeniería de características]
+    E --> F[PCA]
+    F --> G["Pipelines de scikit-learn"]
+    G --> H[Regresión lineal]
+    G --> I[Regresión logística]
+    H --> J[Evaluación con métricas]
+    I --> J
+</pre>
+          <figcaption>Figura 1. Cada laboratorio cubre una etapa; los últimos encadenan el preprocesamiento y el modelo en un mismo pipeline.</figcaption>
+        </figure>
+
+        <h3>Proceso</h3>
+        <ol class="pasos">
+          <li><strong>Extracción y limpieza</strong>Carga de datos con pandas (tipos, fechas, agregaciones) y consultas SQL con joins a una base MySQL mediante SQLAlchemy.</li>
+          <li><strong>Exploración</strong>Distribuciones, correlaciones y visualización de patrones con matplotlib y seaborn.</li>
+          <li><strong>Preprocesamiento</strong>Tratamiento de valores faltantes y atípicos, codificación de variables categóricas y escalado.</li>
+          <li><strong>Ingeniería de características y PCA</strong>Creación y selección de variables, y reducción a los componentes que explican más del 90% de la varianza.</li>
+          <li><strong>Modelado y evaluación</strong>Comparación de codificaciones, escaladores, términos polinómicos y transformaciones (Yeo-Johnson) dentro de pipelines de scikit-learn, medidas con RMSE, R², recall, precisión y accuracy.</li>
+        </ol>
+      </section>
+
+      <!-- ===================== RESULTADOS ===================== -->
+      <section aria-labelledby="resultados">
+        <h2 id="resultados">Resultados</h2>
+
+        <h3>Regresión lineal: precio de diamantes (R² en prueba)</h3>
+        <ul class="barras" aria-label="R² por modelo">
+          <li class="destacada"><span>Polinómica de grado 2</span><span class="pista"><span class="barra" style="--valor: 96.3"></span></span><span class="valor">0.963</span></li>
+          <li><span>One-hot + MinMax</span><span class="pista"><span class="barra" style="--valor: 91.4"></span></span><span class="valor">0.914</span></li>
+          <li><span>Ordinal + Robust</span><span class="pista"><span class="barra" style="--valor: 90.3"></span></span><span class="valor">0.903</span></li>
+          <li><span>Línea base</span><span class="pista"><span class="barra" style="--valor: 84.6"></span></span><span class="valor">0.846</span></li>
+        </ul>
+
+        <div class="tabla-scroll">
+          <table>
+            <caption>Regresión lineal: precio de diamantes (conjunto de prueba)</caption>
+            <thead><tr><th scope="col">Modelo</th><th scope="col">RMSE (USD)</th><th scope="col">R²</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Polinómica de grado 2 ★</th><td>749</td><td>0.963</td></tr>
+              <tr><th scope="row">One-hot + MinMax</th><td>1,143</td><td>0.914</td></tr>
+              <tr><th scope="row">Ordinal + Robust</th><td>1,217</td><td>0.903</td></tr>
+              <tr><th scope="row">Línea base</th><td>1,532</td><td>0.846</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tabla-scroll">
+          <table>
+            <caption>Regresión logística: clasificación de tumores (conjunto de prueba)</caption>
+            <thead><tr><th scope="col">Modelo</th><th scope="col">Recall</th><th scope="col">Precisión</th><th scope="col">Accuracy</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Escalado estándar + PCA ★</th><td>0.929</td><td>1.00</td><td>97.4%</td></tr>
+              <tr><th scope="row">Sin variables correlacionadas + Yeo-Johnson</th><td>0.929</td><td>1.00</td><td>97.4%</td></tr>
+              <tr><th scope="row">Sin variables correlacionadas</th><td>0.905</td><td>1.00</td><td>96.5%</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Conclusiones</h3>
+        <ul>
+          <li>Pasar de la línea base al modelo polinómico redujo a la mitad el error al estimar el precio (de 1,532 a 749 USD de RMSE).</li>
+          <li>En el clasificador, PCA y la transformación Yeo-Johnson subieron el recall de 0.905 a 0.929 sin perder precisión. Se priorizó el recall porque en un diagnóstico médico un falso negativo es el error más grave.</li>
+          <li>El profesor destacó la construcción de pipelines reutilizables y la justificación progresiva del desempeño de cada modelo.</li>
+        </ul>
+      </section>
+
+      <!-- ===================== CERTIFICACIONES ===================== -->
+      <section aria-labelledby="insignias">
+        <h2 id="insignias">Certificaciones obtenidas en la materia</h2>
+        <ul>
+          <li><strong>Data Analysis with Python (DA0101EN)</strong>, IBM · Cognitive Class, julio de 2026. <a href="https://courses.cognitiveclass.ai/certificates/ac53c0c9d8e94e2ea58a753d08d56247" target="_blank" rel="noopener">Verificar certificado</a></li>
+          <li><strong>Enterprise Data Science in Practice</strong>, IBM SkillsBuild, junio de 2026. <a href="https://www.credly.com/badges/725c207a-e299-4374-8f22-5d8962017b26" target="_blank" rel="noopener">Verificar insignia en Credly</a></li>
+        </ul>
+      </section>
+
+      <!-- ===================== ALCANCE ===================== -->
+      <section aria-labelledby="alcance">
+        <h2 id="alcance">Alcance y limitaciones</h2>
+        <p>Son laboratorios académicos con conjuntos de datos públicos y bien conocidos, pensados para practicar cada etapa del
+        ciclo, no soluciones en producción. Los modelos son lineales y logísticos; el trabajo con modelos más complejos
+        (ensambles, redes neuronales) continúa en otras materias de la maestría.</p>
+      </section>
+
+      <!-- ===================== LO QUE DEMUESTRA ===================== -->
+      <section aria-labelledby="demuestra">
+        <h2 id="demuestra">Lo que demuestra</h2>
+        <ul>
+          <li><strong>Ciclo completo de datos:</strong> de la extracción (CSV y SQL) a la evaluación del modelo, con código reproducible en notebooks.</li>
+          <li><strong>Preprocesamiento con criterio:</strong> elegir codificación, escalado y transformaciones según los datos, y medir su efecto.</li>
+          <li><strong>Reducción de dimensionalidad:</strong> uso de PCA para manejar variables muy correlacionadas.</li>
+          <li><strong>Métricas según el costo del error:</strong> priorizar el recall cuando un falso negativo es lo más grave.</li>
+          <li><strong>Buenas prácticas de ML:</strong> pipelines de scikit-learn que encadenan preprocesamiento y modelo para evitar fugas de datos.</li>
+        </ul>
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>
