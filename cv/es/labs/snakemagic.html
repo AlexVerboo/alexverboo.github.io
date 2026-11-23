@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<!-- Página de detalle de laboratorio. Plantilla e instrucciones: ver labs/trees-in-space.html -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>snakemagic.com · Rescate de un WordPress comprometido · Laboratorio de Alex Verboonen</title>
+  <meta name="description" content="Auditoría de un sitio WordPress hackeado (snakemagic.com), migración a un sitio estático en GitHub Pages, cambio de DNS, cierre del hosting y reembolso del 100% de la renovación.">
+  <link rel="alternate" hreflang="es" href="https://alexverboo.github.io/cv/es/labs/snakemagic.html">
+  <link rel="alternate" hreflang="en" href="https://alexverboo.github.io/cv/en/labs/snakemagic.html">
+  <link rel="stylesheet" href="../../labs/labs.css">
+  <script type="module" src="../../labs/labs.js"></script>
+</head>
+
+<body>
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <div class="lab-pagina">
+
+    <!-- ===================== ENCABEZADO ===================== -->
+    <header class="lab-encabezado">
+      <nav class="lab-nav" aria-label="Navegación">
+        <a href="../#laboratorios">← Volver al CV</a>
+        <p class="idioma"><strong>Español</strong> · <a href="../../en/labs/snakemagic.html" lang="en" hreflang="en">English</a></p>
+      </nav>
+
+      <p class="lab-etiqueta-tipo">Laboratorio · Proyecto personal · Nov 2026</p>
+      <h1>snakemagic.com · De WordPress hackeado a sitio estático</h1>
+      <p class="resumen">
+        Rescate y migración de <strong>snakemagic.com</strong>, el sitio de un amigo (un proyecto de comedia en video de 2014–2016)
+        que seguía en un hosting compartido de pago con renovación automática y un servicio de limpieza de malware.
+        Audité el servidor, encontré que el WordPress estaba comprometido, respaldé solo el contenido sano, reconstruí el sitio
+        como página estática en GitHub Pages, moví el DNS y cerré el hosting. Después negocié con el proveedor y conseguí
+        el <strong>reembolso del 100%</strong> de la renovación anual.
+      </p>
+
+      <ul class="tec" aria-label="Tecnologías principales">
+        <li>Auditoría de infraestructura</li><li>Respuesta a incidentes</li><li>DNS</li><li>GitHub Pages</li>
+        <li>HTML / CSS</li><li>cPanel / SSH</li><li>WordPress / MySQL</li><li>Claude (IA)</li>
+      </ul>
+
+      <div class="lab-enlaces">
+        <a class="boton" href="https://snakemagic.com" target="_blank" rel="noopener">Ver el sitio en vivo</a>
+      </div>
+    </header>
+
+    <main id="contenido" class="lab-contenido">
+
+      <!-- ===================== MI PAPEL ===================== -->
+      <section aria-labelledby="papel">
+        <h2 id="papel">Mi papel</h2>
+        <p>
+          Proyecto individual, hecho de forma voluntaria para ayudar a un amigo. Me encargué de todo de principio a fin:
+          auditoría técnica, respaldos, construcción del sitio nuevo, cambio de DNS, cierre del hosting y negociación con el proveedor.
+          Usé a Claude (Anthropic) como asistente para la auditoría y la documentación. El dueño del sitio autorizó el acceso y
+          que este proyecto aparezca en mi CV.
+        </p>
+      </section>
+
+      <!-- ===================== PROBLEMA ===================== -->
+      <section aria-labelledby="problema">
+        <h2 id="problema">Problema y contexto</h2>
+        <ul>
+          <li>El sitio no cambiaba desde 2016, pero se pagaba cada año un hosting compartido y un servicio de limpieza de malware.</li>
+          <li>La renovación automática estaba activa y se cobró en octubre de 2026 sin que el dueño lo quisiera.</li>
+          <li>El sitio se infectaba varias veces al año, aunque se pagaba la limpieza.</li>
+          <li>Los videos embebidos desde Vimeo ya no estaban disponibles; algunos originales solo existían en el servidor.</li>
+        </ul>
+        <p class="nota">
+          Fuentes revisadas: los archivos del servidor (unos 525 MB), la base de datos MySQL de WordPress (13.6 MB),
+          69 archivos de <code>wp-content/uploads</code>, videos MP4, el reporte de ClamAV y la carpeta de cuarentena,
+          y la zona DNS en los paneles del hosting y del registrador.
+        </p>
+      </section>
+
+      <!-- ===================== ANTES Y DESPUÉS ===================== -->
+      <section aria-labelledby="arquitectura">
+        <h2 id="arquitectura">Antes y después</h2>
+        <figure class="diagrama">
+<pre class="mermaid">
+flowchart LR
+    accTitle: Arquitectura antes y después
+    accDescr: Antes, el dominio apuntaba con los nameservers del hosting a un servidor compartido con WordPress, PHP, MySQL, plugins y panel de administración, que estaba comprometido. Después, el DNS se administra en el registrador con registros A y CNAME hacia GitHub Pages, que sirve un sitio estático con HTML, CSS y video por HTTPS.
+    subgraph ANTES["Antes: hosting compartido de pago"]
+      D1[Dominio] -->|nameservers del hosting| H["Servidor compartido"]
+      H --> WP["WordPress + PHP + MySQL + plugins + panel admin"]
+      WP -.-> MAL["Malware recurrente"]
+    end
+    subgraph DESPUES["Después: costo de hosting cero"]
+      D2[Dominio] -->|"registros A y CNAME"| GH["GitHub Pages (HTTPS)"]
+      GH --> ST["HTML + CSS + video MP4"]
+    end
+</pre>
+          <figcaption>Figura 1. De un CMS con servidor expuesto a un sitio estático sin servidor que atacar.</figcaption>
+        </figure>
+      </section>
+
+      <!-- ===================== PROCESO ===================== -->
+      <section aria-labelledby="proceso">
+        <h2 id="proceso">Proceso</h2>
+        <ol class="pasos">
+          <li>
+            <strong>Auditoría del hosting</strong>
+            Revisé servicios contratados, accesos, usuarios, llaves SSH, FTP, cron, correo y DNS para saber qué se pagaba y qué se usaba de verdad.
+          </li>
+          <li>
+            <strong>Análisis de seguridad</strong>
+            Identifiqué los indicadores de compromiso: scripts PHP en <code>uploads</code>, archivos con nombres aleatorios, un plugin y un tema falsos,
+            archivos en cuarentena y el reporte de ClamAV. Decidí no restaurar ni ejecutar nada del WordPress.
+          </li>
+          <li>
+            <strong>Respaldo selectivo</strong>
+            Rescaté solo el contenido sano (videos, imágenes y base de datos) antes de cerrar la cuenta.
+          </li>
+          <li>
+            <strong>Reconstrucción</strong>
+            Hice un sitio estático en HTML y CSS con la intro en video, los clips del elenco y el contacto, publicado en GitHub Pages.
+          </li>
+          <li>
+            <strong>Migración de DNS</strong>
+            Saqué los nameservers del hosting viejo, configuré los registros A y CNAME hacia GitHub Pages y el dominio personalizado, con HTTPS.
+          </li>
+          <li>
+            <strong>Cierre del hosting y reembolso</strong>
+            Apagué la renovación automática, cancelé la cuenta y negocié con soporte: el servicio de malware que se pagaba no había limpiado la infección.
+            El supervisor aprobó el reembolso completo como excepción a la política.
+          </li>
+          <li>
+            <strong>Revisión de costos en el registrador</strong>
+            Encontré un certificado SSL que se pagaba sin usarse y le apagué la renovación automática.
+          </li>
+          <li>
+            <strong>Entrega</strong>
+            Le mandé al dueño un reporte de antes y después, escrito para alguien que no es técnico.
+          </li>
+        </ol>
+      </section>
+
+      <!-- ===================== RESULTADOS ===================== -->
+      <section aria-labelledby="resultados">
+        <h2 id="resultados">Resultados</h2>
+        <div class="tabla-scroll">
+          <table>
+            <thead><tr><th scope="col">Aspecto</th><th scope="col">Antes</th><th scope="col">Después</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Hosting</th><td>Plan compartido de pago + servicio de malware, renovación automática</td><td>GitHub Pages, costo de hosting cero</td></tr>
+              <tr><th scope="row">Renovación ya cobrada</th><td>Cobrada sin que el dueño lo quisiera</td><td><strong>Reembolso del 100%</strong></td></tr>
+              <tr><th scope="row">Superficie de ataque</th><td>PHP, base de datos, plugins y panel de administración</td><td>Solo archivos estáticos por HTTPS</td></tr>
+              <tr><th scope="row">Seguridad</th><td>Infecciones varias veces al año</td><td>Sin código del servidor que se pueda infectar</td></tr>
+              <tr><th scope="row">Contenido</th><td>Videos que solo existían en el servidor</td><td>Videos e imágenes de 2014–2016 rescatados</td></tr>
+              <tr><th scope="row">Servicios extra</th><td>Certificado SSL pagado sin usarse</td><td>Renovación apagada</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Conclusión: para sitios que casi no cambian, un hosting estático es más barato, más seguro y más fácil de mantener que un CMS,
+          y revisar suscripciones y renovaciones automáticas puede ahorrar dinero real.
+        </p>
+      </section>
+
+      <!-- ===================== LO QUE DEMUESTRA ===================== -->
+      <section aria-labelledby="demuestra">
+        <h2 id="demuestra">Lo que demuestra</h2>
+        <ul>
+          <li><strong>Diagnóstico de sistemas heredados:</strong> reviso servidor, DNS, accesos y costos completos antes de cambiar nada.</li>
+          <li><strong>Respuesta a incidentes:</strong> identifico señales de compromiso y tomo decisiones prudentes: respaldar solo lo sano y no restaurar código infectado.</li>
+          <li><strong>Migración con poco tiempo fuera de línea:</strong> gestión de DNS entre dos proveedores y dominio personalizado con HTTPS.</li>
+          <li><strong>Optimización de costos:</strong> eliminación de servicios innecesarios y renovaciones automáticas.</li>
+          <li><strong>Negociación con proveedores:</strong> con hechos y la propia evidencia del proveedor logré un resultado que su política no contemplaba.</li>
+          <li><strong>Comunicación con no técnicos:</strong> reporte claro de antes y después para el dueño del sitio.</li>
+          <li><strong>Trabajo asistido por IA:</strong> usé a Claude (Anthropic) como apoyo en la auditoría de infraestructura y la documentación.</li>
+        </ul>
+      </section>
+
+      <!-- ===================== ENLACES ===================== -->
+      <section aria-labelledby="enlaces">
+        <h2 id="enlaces">Enlaces</h2>
+        <ul>
+          <li>Sitio en vivo: <a href="https://snakemagic.com" target="_blank" rel="noopener">snakemagic.com</a></li>
+        </ul>
+        <p class="nota">Por privacidad del dueño, no se publican la auditoría, los respaldos, el repositorio ni datos de cuentas o montos.</p>
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<!-- Lab detail page. Template and instructions: see labs/trees-in-space.html -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>snakemagic.com · Rescuing a Compromised WordPress Site · Alex Verboonen's Lab</title>
+  <meta name="description" content="Audit of a hacked WordPress site (snakemagic.com), migration to a static site on GitHub Pages, DNS cutover, hosting shutdown and a 100% refund of the renewal.">
+  <link rel="alternate" hreflang="es" href="https://alexverboo.github.io/cv/es/labs/snakemagic.html">
+  <link rel="alternate" hreflang="en" href="https://alexverboo.github.io/cv/en/labs/snakemagic.html">
+  <link rel="stylesheet" href="../../labs/labs.css">
+  <script type="module" src="../../labs/labs.js"></script>
+</head>
+
+<body>
+  <a class="saltar" href="#contenido">Skip to content</a>
+
+  <div class="lab-pagina">
+
+    <!-- ===================== HEADER ===================== -->
+    <header class="lab-encabezado">
+      <nav class="lab-nav" aria-label="Navigation">
+        <a href="../#labs">← Back to CV</a>
+        <p class="idioma"><a href="../../es/labs/snakemagic.html" lang="es" hreflang="es">Español</a> · <strong>English</strong></p>
+      </nav>
+
+      <p class="lab-etiqueta-tipo">Lab · Personal project · Nov 2026</p>
+      <h1>snakemagic.com · From Hacked WordPress to a Static Site</h1>
+      <p class="resumen">
+        Rescue and migration of <strong>snakemagic.com</strong>, a friend's website (a video comedy project from 2014–2016)
+        that was still on paid shared hosting with auto-renewal and a malware-cleaning add-on.
+        I audited the server, found the WordPress install was compromised, backed up only the clean content, rebuilt the site
+        as a static page on GitHub Pages, moved the DNS and closed the hosting account. I then negotiated with the provider and
+        secured a <strong>100% refund</strong> of the annual renewal.
+      </p>
+
+      <ul class="tec" aria-label="Main technologies">
+        <li>Infrastructure audit</li><li>Incident response</li><li>DNS</li><li>GitHub Pages</li>
+        <li>HTML / CSS</li><li>cPanel / SSH</li><li>WordPress / MySQL</li><li>Claude (AI)</li>
+      </ul>
+
+      <div class="lab-enlaces">
+        <a class="boton" href="https://snakemagic.com" target="_blank" rel="noopener">View the live site</a>
+      </div>
+    </header>
+
+    <main id="contenido" class="lab-contenido">
+
+      <!-- ===================== MY ROLE ===================== -->
+      <section aria-labelledby="papel">
+        <h2 id="papel">My role</h2>
+        <p>
+          Individual project, done voluntarily to help a friend. I handled everything end to end:
+          technical audit, backups, building the new site, DNS cutover, closing the hosting account and negotiating with the provider.
+          I used Claude (Anthropic) as an assistant for the audit and documentation. The site owner authorized the access and
+          agreed to this project appearing on my CV.
+        </p>
+      </section>
+
+      <!-- ===================== PROBLEM ===================== -->
+      <section aria-labelledby="problema">
+        <h2 id="problema">Problem and context</h2>
+        <ul>
+          <li>The site hadn't changed since 2016, yet shared hosting and a malware-cleaning service were paid for every year.</li>
+          <li>Auto-renewal was on, and the plan renewed in October 2026 without the owner wanting it.</li>
+          <li>The site got infected several times a year despite the paid cleanup.</li>
+          <li>The embedded Vimeo videos were no longer available; some originals existed only on the server.</li>
+        </ul>
+        <p class="nota">
+          Sources reviewed: the server files (about 525 MB), the WordPress MySQL database (13.6 MB),
+          69 files in <code>wp-content/uploads</code>, MP4 videos, the ClamAV report and quarantine folder,
+          and the DNS zone in the hosting and registrar panels.
+        </p>
+      </section>
+
+      <!-- ===================== BEFORE AND AFTER ===================== -->
+      <section aria-labelledby="arquitectura">
+        <h2 id="arquitectura">Before and after</h2>
+        <figure class="diagrama">
+<pre class="mermaid">
+flowchart LR
+    accTitle: Architecture before and after
+    accDescr: Before, the domain pointed through the hosting nameservers to a shared server running WordPress, PHP, MySQL, plugins and an admin panel, which was compromised. After, DNS is managed at the registrar with A and CNAME records pointing to GitHub Pages, which serves a static site with HTML, CSS and video over HTTPS.
+    subgraph BEFORE["Before: paid shared hosting"]
+      D1[Domain] -->|hosting nameservers| H["Shared server"]
+      H --> WP["WordPress + PHP + MySQL + plugins + admin panel"]
+      WP -.-> MAL["Recurring malware"]
+    end
+    subgraph AFTER["After: zero hosting cost"]
+      D2[Domain] -->|"A and CNAME records"| GH["GitHub Pages (HTTPS)"]
+      GH --> ST["HTML + CSS + MP4 video"]
+    end
+</pre>
+          <figcaption>Figure 1. From a CMS with an exposed server to a static site with no server to attack.</figcaption>
+        </figure>
+      </section>
+
+      <!-- ===================== PROCESS ===================== -->
+      <section aria-labelledby="proceso">
+        <h2 id="proceso">Process</h2>
+        <ol class="pasos">
+          <li>
+            <strong>Hosting audit</strong>
+            Reviewed contracted services, access, users, SSH keys, FTP, cron, email and DNS to see what was being paid for and what was actually used.
+          </li>
+          <li>
+            <strong>Security analysis</strong>
+            Identified the indicators of compromise: PHP scripts in <code>uploads</code>, randomly named files, a fake plugin and theme,
+            quarantined files and the ClamAV report. Decided not to restore or run anything from the WordPress install.
+          </li>
+          <li>
+            <strong>Selective backup</strong>
+            Saved only the clean content (videos, images and database) before closing the account.
+          </li>
+          <li>
+            <strong>Rebuild</strong>
+            Built a static HTML and CSS site with the video intro, cast clips and contact info, published on GitHub Pages.
+          </li>
+          <li>
+            <strong>DNS migration</strong>
+            Moved the domain off the old hosting nameservers and set up A and CNAME records to GitHub Pages plus the custom domain, with HTTPS.
+          </li>
+          <li>
+            <strong>Hosting shutdown and refund</strong>
+            Turned off auto-renewal, cancelled the account and negotiated with support: the paid malware service had not cleaned the infection.
+            The supervisor approved a full refund as an exception to policy.
+          </li>
+          <li>
+            <strong>Registrar cost review</strong>
+            Found an SSL certificate being paid for but unused, and turned off its auto-renewal.
+          </li>
+          <li>
+            <strong>Handover</strong>
+            Sent the owner a before-and-after report written for a non-technical reader.
+          </li>
+        </ol>
+      </section>
+
+      <!-- ===================== RESULTS ===================== -->
+      <section aria-labelledby="resultados">
+        <h2 id="resultados">Results</h2>
+        <div class="tabla-scroll">
+          <table>
+            <thead><tr><th scope="col">Area</th><th scope="col">Before</th><th scope="col">After</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Hosting</th><td>Paid shared plan + malware add-on, auto-renewing</td><td>GitHub Pages, zero hosting cost</td></tr>
+              <tr><th scope="row">Renewal already charged</th><td>Charged without the owner wanting it</td><td><strong>100% refund</strong></td></tr>
+              <tr><th scope="row">Attack surface</th><td>PHP, database, plugins and admin panel</td><td>Static files over HTTPS only</td></tr>
+              <tr><th scope="row">Security</th><td>Infections several times a year</td><td>No server-side code to infect</td></tr>
+              <tr><th scope="row">Content</th><td>Videos that existed only on the server</td><td>2014–2016 videos and images rescued</td></tr>
+              <tr><th scope="row">Extra services</th><td>SSL certificate paid for but unused</td><td>Auto-renewal turned off</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Takeaway: for sites that rarely change, static hosting is cheaper, safer and easier to maintain than a CMS,
+          and reviewing subscriptions and auto-renewals can save real money.
+        </p>
+      </section>
+
+      <!-- ===================== WHAT IT SHOWS ===================== -->
+      <section aria-labelledby="demuestra">
+        <h2 id="demuestra">What it shows</h2>
+        <ul>
+          <li><strong>Legacy system diagnosis:</strong> I review the full server, DNS, access and costs before changing anything.</li>
+          <li><strong>Incident response:</strong> I spot signs of compromise and make careful calls: back up only clean content and never restore infected code.</li>
+          <li><strong>Low-downtime migration:</strong> DNS management across two providers and a custom domain with HTTPS.</li>
+          <li><strong>Cost optimization:</strong> removing unneeded services and auto-renewals.</li>
+          <li><strong>Vendor negotiation:</strong> using facts and the provider's own evidence, I got an outcome their policy didn't cover.</li>
+          <li><strong>Communicating with non-technical people:</strong> a clear before-and-after report for the site owner.</li>
+          <li><strong>AI-assisted work:</strong> used Claude (Anthropic) to support the infrastructure audit and documentation.</li>
+        </ul>
+      </section>
+
+      <!-- ===================== LINKS ===================== -->
+      <section aria-labelledby="enlaces">
+        <h2 id="enlaces">Links</h2>
+        <ul>
+          <li>Live site: <a href="https://snakemagic.com" target="_blank" rel="noopener">snakemagic.com</a></li>
+        </ul>
+        <p class="nota">To protect the owner's privacy, the audit, backups, repository, account details and amounts are not published.</p>
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>
