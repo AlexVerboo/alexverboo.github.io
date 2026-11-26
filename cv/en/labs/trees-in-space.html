@@ -64,7 +64,7 @@
 
       <!-- ===================== VERSIÓN 1.0 ===================== -->
       <div class="version-panel" role="tabpanel" id="panel-v1" aria-labelledby="tab-v1">
-        <p class="version-estado"><strong>Version 1.0 · in production.</strong> What runs today: the bot was born in 2022 and modernized in November 2026. Google Sheets works as the database.</p>
+        <p class="version-estado"><strong>Version 1.0 · in production.</strong> What runs today: the bot was born in 2022 and modernized in November 2026. Google Sheets works as the database. This version is frozen in the <a href="https://github.com/AlexVerboo/treebot/releases/tag/v1.0.0" target="_blank" rel="noopener">v1.0.0 release</a>.</p>
 
 
       <!-- ===================== STACK ===================== -->
@@ -256,7 +256,7 @@ flowchart TD
       <!-- ===================== VERSIÓN 2.0 ===================== -->
       <div class="version-panel" role="tabpanel" id="panel-v2" aria-labelledby="tab-v2">
 
-        <p class="version-estado"><strong>Version 2.0 · in development (since November 2026).</strong> This tab describes the design and the plan; it is updated as each phase ships. Nothing shown here is in production yet.</p>
+        <p class="version-estado"><strong>Version 2.0 · in development (since November 2026).</strong> This tab describes the design and the plan; it is updated as each phase ships. Phases marked “delivered” are complete; the rest are still planned.</p>
 
         <section aria-labelledby="v2-goals">
           <h2 id="v2-goals">Goals</h2>
@@ -313,7 +313,7 @@ flowchart TB
         <section aria-labelledby="v2-phases">
           <h2 id="v2-phases">Phased plan</h2>
           <ol class="pasos">
-            <li><strong>Assessment <span class="modo">planned</span></strong> Map of the current data flow and a list of weak points ranked by risk.</li>
+            <li><strong>Assessment <span class="modo">delivered</span></strong> Map of the current data flow and a list of weak points ranked by risk. Key findings: the Halo token expired without being renewed, the daily job started 8 to 12 hours late, and the webhook processed every message before responding.</li>
             <li><strong>Stability <span class="modo">planned</span></strong> A single runtime (Python 3.11), immediate webhook response with background processing, health endpoint, retries with backoff, alerts and tests in CI.</li>
             <li><strong>Database <span class="modo">planned</span></strong> PostgreSQL schema with versioned migrations, idempotent match ingestion and a one-time migration from Google Sheets.</li>
             <li><strong>Awards and player page <span class="modo">planned</span></strong> Nightly MVP, most improved and best duo; a page with a 30-day trend, player synergy and strong and weak maps.</li>
@@ -361,6 +361,7 @@ flowchart TB
         <h2 id="enlaces">Links</h2>
         <ul>
           <li>Repository: <a href="https://github.com/AlexVerboo/treebot" target="_blank" rel="noopener">github.com/AlexVerboo/treebot</a></li>
+          <li>v1.0.0 release: <a href="https://github.com/AlexVerboo/treebot/releases/tag/v1.0.0" target="_blank" rel="noopener">github.com/AlexVerboo/treebot/releases/tag/v1.0.0</a></li>
           <li>Live demo (records): <a href="https://treebot-vunp.onrender.com" target="_blank" rel="noopener">treebot-vunp.onrender.com</a></li>
           <li>Roles page: <a href="https://treebot-vunp.onrender.com/roles" target="_blank" rel="noopener">treebot-vunp.onrender.com/roles</a></li>
         </ul>

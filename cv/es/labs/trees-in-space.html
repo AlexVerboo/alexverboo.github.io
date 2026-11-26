@@ -78,7 +78,7 @@
 
       <!-- ===================== VERSIÓN 1.0 ===================== -->
       <div class="version-panel" role="tabpanel" id="panel-v1" aria-labelledby="tab-v1">
-        <p class="version-estado"><strong>Versión 1.0 · en producción.</strong> Lo que corre hoy: el bot nació en 2022 y se modernizó en noviembre de 2026. Google Sheets funciona como base de datos.</p>
+        <p class="version-estado"><strong>Versión 1.0 · en producción.</strong> Lo que corre hoy: el bot nació en 2022 y se modernizó en noviembre de 2026. Google Sheets funciona como base de datos. Esta versión quedó congelada en el <a href="https://github.com/AlexVerboo/treebot/releases/tag/v1.0.0" target="_blank" rel="noopener">release v1.0.0</a>.</p>
 
 
       <!-- ===================== STACK ===================== -->
@@ -270,7 +270,7 @@ flowchart TD
       <!-- ===================== VERSIÓN 2.0 ===================== -->
       <div class="version-panel" role="tabpanel" id="panel-v2" aria-labelledby="tab-v2">
 
-        <p class="version-estado"><strong>Versión 2.0 · en desarrollo (desde noviembre de 2026).</strong> Esta pestaña describe el diseño y el plan; se actualiza conforme se entrega cada fase. Nada de lo que aparece aquí está en producción todavía.</p>
+        <p class="version-estado"><strong>Versión 2.0 · en desarrollo (desde noviembre de 2026).</strong> Esta pestaña describe el diseño y el plan; se actualiza conforme se entrega cada fase. Las fases marcadas como “entregado” ya se completaron; las demás siguen en plan.</p>
 
         <section aria-labelledby="v2-objetivos">
           <h2 id="v2-objetivos">Objetivos</h2>
@@ -327,7 +327,7 @@ flowchart TB
         <section aria-labelledby="v2-fases">
           <h2 id="v2-fases">Plan por fases</h2>
           <ol class="pasos">
-            <li><strong>Diagnóstico <span class="modo">planeado</span></strong> Mapa del flujo de datos actual y lista de puntos frágiles ordenada por riesgo.</li>
+            <li><strong>Diagnóstico <span class="modo">entregado</span></strong> Mapa del flujo de datos actual y lista de puntos frágiles ordenada por riesgo. Hallazgos principales: el token de Halo caducaba sin renovarse, el job diario arrancaba con 8 a 12 horas de retraso y el webhook procesaba cada mensaje antes de responder.</li>
             <li><strong>Estabilidad <span class="modo">planeado</span></strong> Un solo runtime (Python 3.11), respuesta inmediata al webhook con procesamiento en segundo plano, endpoint de salud, reintentos con <em>backoff</em>, alertas y pruebas en CI.</li>
             <li><strong>Base de datos <span class="modo">planeado</span></strong> Esquema en PostgreSQL con migraciones versionadas, ingesta idempotente de partidas y migración única desde Google Sheets.</li>
             <li><strong>Premios y página por jugador <span class="modo">planeado</span></strong> MVP, el que más mejoró y mejor duo de la noche; página con tendencia de 30 días, sinergia entre jugadores y mapas fuertes y débiles.</li>
@@ -375,6 +375,7 @@ flowchart TB
         <h2 id="enlaces">Enlaces</h2>
         <ul>
           <li>Repositorio: <a href="https://github.com/AlexVerboo/treebot" target="_blank" rel="noopener">github.com/AlexVerboo/treebot</a></li>
+          <li>Release v1.0.0: <a href="https://github.com/AlexVerboo/treebot/releases/tag/v1.0.0" target="_blank" rel="noopener">github.com/AlexVerboo/treebot/releases/tag/v1.0.0</a></li>
           <li>Demo en vivo (récords): <a href="https://treebot-vunp.onrender.com" target="_blank" rel="noopener">treebot-vunp.onrender.com</a></li>
           <li>Página de roles: <a href="https://treebot-vunp.onrender.com/roles" target="_blank" rel="noopener">treebot-vunp.onrender.com/roles</a></li>
         </ul>
