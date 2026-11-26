@@ -314,7 +314,7 @@ flowchart TB
           <h2 id="v2-phases">Phased plan</h2>
           <ol class="pasos">
             <li><strong>Assessment <span class="modo">delivered</span></strong> Map of the current data flow and a list of weak points ranked by risk. Key findings: the Halo token expired without being renewed, the daily job started 8 to 12 hours late, and the webhook processed every message before responding.</li>
-            <li><strong>Stability <span class="modo">planned</span></strong> A single runtime (Python 3.11), immediate webhook response with background processing, health endpoint, retries with backoff, alerts and tests in CI.</li>
+            <li><strong>Stability <span class="modo">delivered</span></strong> A single runtime (Python 3.11), immediate webhook response with background processing, health endpoint with an external monitor, retries with backoff, Discord alerts and 37 tests in CI. The Halo token now renews itself on every run, and the bot starts the daily job on time (GitHub's cron is the backup).</li>
             <li><strong>Database <span class="modo">planned</span></strong> PostgreSQL schema with versioned migrations, idempotent match ingestion and a one-time migration from Google Sheets.</li>
             <li><strong>Awards and player page <span class="modo">planned</span></strong> Nightly MVP, most improved and best duo; a page with a 30-day trend, player synergy and strong and weak maps.</li>
             <li><strong>AI coach <span class="modo">planned</span></strong> <code>coach!</code> command with daily cache, cooldown and a non-AI fallback if the API is down.</li>
