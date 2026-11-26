@@ -69,6 +69,18 @@
 
     <main id="contenido" class="lab-contenido">
 
+      <!-- ===================== VERSIONES (pestañas) ===================== -->
+      <div class="versiones" data-tabs>
+        <div class="versiones-lista" role="tablist" aria-label="Versiones de TreeBot">
+          <button type="button" role="tab" id="tab-v1" data-hash="v1" aria-controls="panel-v1" aria-selected="true">v1.0 · en producción</button>
+          <button type="button" role="tab" id="tab-v2" data-hash="v2" aria-controls="panel-v2" aria-selected="false" tabindex="-1">v2.0 · en desarrollo</button>
+        </div>
+
+      <!-- ===================== VERSIÓN 1.0 ===================== -->
+      <div class="version-panel" role="tabpanel" id="panel-v1" aria-labelledby="tab-v1">
+        <p class="version-estado"><strong>Versión 1.0 · en producción.</strong> Lo que corre hoy: el bot nació en 2022 y se modernizó en noviembre de 2026. Google Sheets funciona como base de datos.</p>
+
+
       <!-- ===================== STACK ===================== -->
       <section aria-labelledby="stack">
         <h2 id="stack">Stack tecnológico</h2>
@@ -92,7 +104,7 @@
       <section aria-labelledby="arquitectura">
         <h2 id="arquitectura">Arquitectura del servicio</h2>
         <ul>
-          <li><strong>Bot web (Flask en Render):</strong> recibe los mensajes de GroupMe por webhook, responde comandos (récords, estadísticas personales, menú) y sirve la web pública de récords y roles, además de endpoints JSON.</li>
+          <li><strong>Bot web (Flask en Render):</strong> recibe los mensajes de GroupMe por webhook, responde comandos (récords, estadísticas personales, menú, un video al azar de snakemagic.com) y sirve la web pública de récords y roles, además de endpoints JSON.</li>
           <li><strong>Capa de datos (<code>sheets.py</code>):</strong> acceso único a Google Sheets con caché en memoria de 5 minutos; lo comparten el bot y los scripts.</li>
           <li><strong>Workers en GitHub Actions:</strong> scripts que consultan la API de Halo (actualizador de récords, estadísticas por jugador, resumen nocturno “GGs”, alta de miembros) y escriben en la hoja o en GroupMe.</li>
           <li><strong>Google Sheets:</strong> funciona como base de datos: récords, miembros, roles, estadísticas y una caché de identificadores de Xbox (XUIDs).</li>
@@ -253,6 +265,110 @@ flowchart TD
           <li><strong>Producto para usuarios reales:</strong> lo usa a diario una comunidad de unos 30 jugadores.</li>
         </ul>
       </section>
+      </div>
+
+      <!-- ===================== VERSIÓN 2.0 ===================== -->
+      <div class="version-panel" role="tabpanel" id="panel-v2" aria-labelledby="tab-v2">
+
+        <p class="version-estado"><strong>Versión 2.0 · en desarrollo (desde noviembre de 2026).</strong> Esta pestaña describe el diseño y el plan; se actualiza conforme se entrega cada fase. Nada de lo que aparece aquí está en producción todavía.</p>
+
+        <section aria-labelledby="v2-objetivos">
+          <h2 id="v2-objetivos">Objetivos</h2>
+          <ul>
+            <li><strong>Estabilidad:</strong> que ningún comando se pierda aunque el servidor gratuito esté dormido, y enterarse de una falla antes que el grupo.</li>
+            <li><strong>Historial:</strong> guardar cada partida una sola vez en una base de datos, en lugar de volver a consultar la API de Halo en cada comando.</li>
+            <li><strong>Presentación:</strong> premios de la noche en el chat y una página por jugador con tendencias, mejores duos y mapas fuertes.</li>
+            <li><strong>Consejos, no solo datos:</strong> un comando <code>coach!</code> que convierte las estadísticas de cada quien en tres recomendaciones concretas.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="v2-stack">
+          <h2 id="v2-stack">Cambios en el stack</h2>
+          <div class="tabla-scroll">
+            <table>
+              <thead><tr><th scope="col">Capa</th><th scope="col">v1.0</th><th scope="col">v2.0</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Lenguaje</th><td>Dos runtimes de Python (bot antiguo y workers en 3.11)</td><td>Python 3.11 en todo el sistema</td></tr>
+                <tr><th scope="row">Datos</th><td>Google Sheets para todo</td><td>PostgreSQL serverless (Neon) para partidas e historial; Google Sheets para lo que se edita a mano (miembros y roles)</td></tr>
+                <tr><th scope="row">IA</th><td>No</td><td>API de Claude (modelo Haiku) para el comando <code>coach!</code></td></tr>
+                <tr><th scope="row">Observabilidad</th><td>Revisión manual</td><td>Endpoint <code>/health</code>, monitor externo de disponibilidad y alertas a un canal privado de Discord</td></tr>
+                <tr><th scope="row">Calidad</th><td>Sin pruebas automatizadas</td><td>Pruebas con <code>pytest</code> y CI en cada pull request</td></tr>
+                <tr><th scope="row">Hosting</th><td>Render (plan gratuito)</td><td>Render, evaluando migrar a Google Cloud Run</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section aria-labelledby="v2-arquitectura">
+          <h2 id="v2-arquitectura">Arquitectura objetivo</h2>
+          <figure class="diagrama">
+<pre class="mermaid">
+flowchart TB
+    accTitle: Arquitectura objetivo de TreeBot 2.0
+    accDescr: Los miembros escriben en GroupMe, que envía los mensajes al bot Flask en Render. El bot consulta Postgres en Neon para partidas e historial, Google Sheets para miembros y roles, y la API de Claude para el comando coach. GitHub Actions consulta la API de Halo con SPNKr, guarda las partidas nuevas en Postgres y publica los premios de la noche en GroupMe. Un monitor externo revisa el endpoint de salud del bot y las fallas se avisan en un canal privado de Discord.
+    U[Miembros] -->|mensajes| GM[GroupMe]
+    GM -->|webhook| BOT["Bot Flask (Render, Python 3.11)"]
+    BOT -->|respuestas| GM
+    BOT <-->|partidas e historial| PG[("Postgres (Neon)")]
+    BOT <-->|miembros y roles| GS[(Google Sheets)]
+    BOT -->|coach| LLM["API de Claude (Haiku)"]
+    GHA[GitHub Actions] -->|SPNKr| HALO[API Halo Infinite]
+    GHA -->|partidas nuevas| PG
+    GHA -->|premios de la noche| GM
+    MON[Monitor externo] -->|health| BOT
+    BOT -. alertas .-> DC[Discord privado]
+    GHA -. alertas .-> DC
+    BOT --> WEB["Web pública: récords, roles y jugador"]
+</pre>
+            <figcaption>Figura 3. Componentes planeados para la versión 2.0.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="v2-fases">
+          <h2 id="v2-fases">Plan por fases</h2>
+          <ol class="pasos">
+            <li><strong>Diagnóstico <span class="modo">planeado</span></strong> Mapa del flujo de datos actual y lista de puntos frágiles ordenada por riesgo.</li>
+            <li><strong>Estabilidad <span class="modo">planeado</span></strong> Un solo runtime (Python 3.11), respuesta inmediata al webhook con procesamiento en segundo plano, endpoint de salud, reintentos con <em>backoff</em>, alertas y pruebas en CI.</li>
+            <li><strong>Base de datos <span class="modo">planeado</span></strong> Esquema en PostgreSQL con migraciones versionadas, ingesta idempotente de partidas y migración única desde Google Sheets.</li>
+            <li><strong>Premios y página por jugador <span class="modo">planeado</span></strong> MVP, el que más mejoró y mejor duo de la noche; página con tendencia de 30 días, sinergia entre jugadores y mapas fuertes y débiles.</li>
+            <li><strong>Coach con IA <span class="modo">planeado</span></strong> Comando <code>coach!</code> con caché diaria, <em>cooldown</em> y respaldo sin IA si la API no responde.</li>
+          </ol>
+        </section>
+
+        <section aria-labelledby="v2-decisiones">
+          <h2 id="v2-decisiones">Decisiones de diseño</h2>
+          <ul class="retos">
+            <li>
+              <h3>Sheets para personas, Postgres para máquinas</h3>
+              <p>La hoja sigue siendo el panel de control para lo que el grupo edita a mano. Lo que generan los scripts (partidas, estadísticas por fecha, caché de XUIDs) pasa a tablas, con historial y consultas rápidas.</p>
+            </li>
+            <li>
+              <h3>La IA interpreta, no calcula</h3>
+              <p>Python calcula las comparaciones (contra el promedio propio, el del grupo y por modo) y el modelo solo las convierte en consejos. Así no puede inventar estadísticas y cada recomendación queda ligada a un número verificable.</p>
+            </li>
+            <li>
+              <h3>Costo casi cero</h3>
+              <p>Base de datos en un plan gratuito que se apaga sin uso, modelo de IA pequeño con caché por jugador y día (fracciones de centavo de dólar por consulta) y servicios gratuitos de monitoreo.</p>
+            </li>
+            <li>
+              <h3>Lo negativo, solo en privado</h3>
+              <p>En el chat del grupo solo se publican reconocimientos; las áreas de mejora aparecen únicamente cuando cada jugador pide sus propias estadísticas.</p>
+            </li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="v2-demuestra">
+          <h2 id="v2-demuestra">Lo que demostrará</h2>
+          <ul>
+            <li><strong>Confiabilidad en infraestructura gratuita:</strong> diseño para servidores que se duermen, monitoreo y alertas.</li>
+            <li><strong>Modelado de datos:</strong> esquema relacional, migraciones versionadas e ingesta idempotente.</li>
+            <li><strong>IA aplicada con control de costos:</strong> un modelo de lenguaje integrado a un producto real, con datos calculados de forma determinista.</li>
+            <li><strong>Entrega por fases:</strong> una rama y un pull request por fase, con pruebas automatizadas.</li>
+          </ul>
+        </section>
+      </div>
+      </div>
+
 
       <!-- ===================== ENLACES ===================== -->
       <section aria-labelledby="enlaces">

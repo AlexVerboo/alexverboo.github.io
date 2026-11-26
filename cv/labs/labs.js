@@ -27,4 +27,43 @@ mermaid.initialize({
   flowchart: { curve: "basis", htmlLabels: true },
 });
 
-await mermaid.run({ querySelector: "pre.mermaid" });
+// Los diagramas se dibujan antes de ocultar pestañas: Mermaid no puede medir
+// elementos ocultos.
+try {
+  await mermaid.run({ querySelector: "pre.mermaid" });
+} catch (e) {
+  console.error(e);
+}
+
+/* Pestañas (por ejemplo, versiones de un laboratorio).
+   Marcado: <div data-tabs> con role="tablist", botones role="tab" y paneles role="tabpanel".
+   Se puede abrir una pestaña desde el enlace: pagina.html#v2 */
+function initTabs() {
+  document.documentElement.classList.add("js-tabs");
+  document.querySelectorAll("[data-tabs]").forEach((box) => {
+    const tabs = [...box.querySelectorAll('[role="tab"]')];
+    const select = (tab, focus) => {
+      tabs.forEach((t) => {
+        const on = t === tab;
+        t.setAttribute("aria-selected", on);
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+      });
+      if (focus) tab.focus();
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener("click", () => {
+        select(t);
+        history.replaceState(null, "", "#" + (t.dataset.hash || t.id));
+      });
+      t.addEventListener("keydown", (e) => {
+        const n = tabs.length;
+        const next = { ArrowRight: (i + 1) % n, ArrowLeft: (i - 1 + n) % n, Home: 0, End: n - 1 }[e.key];
+        if (next !== undefined) { e.preventDefault(); select(tabs[next], true); }
+      });
+    });
+    const fromHash = tabs.find((t) => "#" + t.dataset.hash === location.hash);
+    select(fromHash || tabs.find((t) => t.getAttribute("aria-selected") === "true") || tabs[0]);
+  });
+}
+initTabs();
