@@ -1,10 +1,345 @@
 <!DOCTYPE html>
+<!--
+  ============================================================
+   PORTADA (LANDING) DE alexverboonen.com
+  ============================================================
+   Una sola página bilingüe (español / inglés).
+   • Cada texto existe dos veces: uno con class="es" y otro con class="en".
+     Solo se muestra el del idioma activo.
+   • El idioma se elige así: botón ES/EN → idioma del navegador → español.
+   • Colores: mismas variables que el CV (sección :root), para que todo
+     el sitio se vea como uno solo.
+   • Para agregar un laboratorio: copia un bloque <a class="lab">…</a>
+     dentro de la sección "labs" y cambia textos y enlaces.
+  ============================================================
+-->
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <title>Alex Verboonen Cabrera</title>
-  <meta http-equiv="refresh" content="0; url=/cv/es/">
-  <link rel="canonical" href="https://alexverboonen.com/cv/es/">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alex Verboonen Cabrera · Systems Engineer, DevOps & Cloud</title>
+  <meta name="description" content="Alex Verboonen Cabrera: Systems Engineer y DevOps con más de 10 años en infraestructura, Google Professional Cloud Architect. CV y laboratorios de datos, IA y cloud.">
+  <link rel="canonical" href="https://alexverboonen.com/">
+
+  <!-- Vista previa al compartir el enlace (LinkedIn, WhatsApp, etc.) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://alexverboonen.com/">
+  <meta property="og:title" content="Alex Verboonen Cabrera · Systems Engineer, DevOps & Cloud">
+  <meta property="og:description" content="Más de 10 años en infraestructura para empresas globales. CV y laboratorios de datos, IA y cloud.">
+
+  <style>
+    /* ---------- 1. VARIABLES (las mismas del CV) ---------- */
+    :root {
+      --color-fondo:   #f5f6f8;
+      --color-tarjeta: #ffffff;
+      --color-lateral: #14213d;
+      --color-acento:  #2a9d8f;
+      --color-boton:   #1d6b62;   /* verde oscuro: buen contraste con texto blanco */
+      --color-texto:   #1f2933;
+      --color-suave:   #5f6b7a;
+      --fuente: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--fuente);
+      background: var(--color-fondo);
+      color: var(--color-texto);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .contenedor { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+
+    /* Idiomas: solo se ve el activo */
+    html[lang="es"] .en, html[lang="en"] .es { display: none !important; }
+
+    /* ---------- 2. ENCABEZADO OSCURO ---------- */
+    .hero {
+      background: var(--color-lateral);
+      color: #e8ecf2;
+      padding: 28px 0 72px;
+    }
+    .barra {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 56px;
+    }
+    .marca { font-weight: 700; letter-spacing: 1px; color: #fff; }
+    .idiomas { display: flex; gap: 4px; }
+    .idiomas button {
+      font: inherit; font-size: 13px; font-weight: 600;
+      padding: 4px 10px; border-radius: 6px; cursor: pointer;
+      background: transparent; color: #aab4c3;
+      border: 1px solid rgba(255,255,255,.2);
+    }
+    .idiomas button[aria-pressed="true"] { background: var(--color-acento); color: #fff; border-color: var(--color-acento); }
+
+    .presentacion { display: flex; gap: 36px; align-items: center; }
+    .avatar {
+      flex: none;
+      width: 132px; height: 132px; border-radius: 50%;
+      background: var(--color-acento);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 46px; font-weight: 700; color: #fff;
+    }
+    .hero h1 { font-size: 40px; line-height: 1.15; color: #fff; }
+    .titular { color: var(--color-acento); font-weight: 600; font-size: 18px; margin: 6px 0 14px; }
+    .pitch { max-width: 620px; font-size: 16px; color: #cfd6e0; }
+
+    .acciones { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+    .boton {
+      display: inline-block; padding: 10px 18px; border-radius: 8px;
+      font-size: 15px; font-weight: 600;
+      transition: background .15s, border-color .15s;
+    }
+    .boton.principal { background: var(--color-acento); color: #fff; }
+    .boton.principal:hover { background: #238579; }
+    .boton.secundario { border: 1px solid rgba(255,255,255,.3); color: #e8ecf2; }
+    .boton.secundario:hover { border-color: #fff; }
+    .boton:focus-visible, .lab:focus-visible, .idiomas button:focus-visible {
+      outline: 3px solid var(--color-acento); outline-offset: 2px;
+    }
+
+    /* ---------- 3. DATOS CLAVE (tarjeta que monta sobre el encabezado) ---------- */
+    .datos {
+      margin-top: -40px;
+      background: var(--color-tarjeta);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(20,33,61,.12);
+      display: grid; grid-template-columns: repeat(4, 1fr);
+    }
+    .dato { padding: 20px 22px; border-left: 1px solid #e1e5ea; }
+    .dato:first-child { border-left: none; }
+    .dato strong { display: block; font-size: 22px; color: var(--color-lateral); line-height: 1.2; }
+    .dato span { font-size: 13px; color: var(--color-suave); }
+
+    /* ---------- 4. SECCIONES ---------- */
+    section { padding: 56px 0 8px; }
+    h2 {
+      font-size: 22px; margin-bottom: 6px;
+      display: inline-block; padding-bottom: 4px;
+      border-bottom: 2px solid var(--color-acento);
+    }
+    .intro { color: var(--color-suave); margin: 10px 0 22px; max-width: 680px; }
+
+    /* Tarjetas de laboratorios */
+    .labs { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+    .lab {
+      display: flex; flex-direction: column;
+      background: var(--color-tarjeta);
+      border: 1px solid #e1e5ea; border-radius: 12px;
+      padding: 20px 22px;
+      transition: transform .15s, box-shadow .15s, border-color .15s;
+    }
+    .lab:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(20,33,61,.10); border-color: var(--color-acento); }
+    .categoria { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-acento); }
+    .lab h3 { font-size: 17px; margin: 4px 0 6px; }
+    .lab p { font-size: 15px; color: #3e4a59; }
+    .metrica { margin-top: 10px; font-size: 14px; font-weight: 600; color: var(--color-boton); }
+    .tec { margin: 12px 0 14px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .tec span { font-size: 12px; padding: 2px 9px; border-radius: 4px; background: #e6f4f2; color: #1d6b62; }
+    .ver { margin-top: auto; font-size: 14px; font-weight: 600; color: var(--color-boton); }
+
+    /* Lo que hago */
+    .areas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .area { background: var(--color-tarjeta); border-radius: 12px; padding: 20px 22px; border: 1px solid #e1e5ea; }
+    .area h3 { font-size: 16px; margin-bottom: 6px; }
+    .area p { font-size: 14px; color: #3e4a59; }
+
+    /* ---------- 5. PIE ---------- */
+    footer { margin-top: 64px; background: var(--color-lateral); color: #aab4c3; padding: 36px 0; font-size: 14px; }
+    footer .contenedor { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: center; }
+    footer strong { color: #fff; }
+    footer nav { display: flex; gap: 18px; }
+    footer a:hover { color: #fff; }
+
+    /* ---------- 6. CELULARES ---------- */
+    @media (max-width: 760px) {
+      .barra { margin-bottom: 36px; }
+      .presentacion { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .avatar { width: 96px; height: 96px; font-size: 34px; }
+      .hero h1 { font-size: 32px; }
+      .datos { grid-template-columns: 1fr 1fr; }
+      .dato:nth-child(3) { border-left: none; }
+      .dato:nth-child(n+3) { border-top: 1px solid #e1e5ea; }
+      .areas { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
 </head>
-<body><a href="/cv/es/">Ir al CV</a></body>
+<body>
+
+  <!-- ===== ENCABEZADO ===== -->
+  <header class="hero">
+    <div class="contenedor">
+      <div class="barra">
+        <span class="marca">alexverboonen.com</span>
+        <div class="idiomas" role="group" aria-label="Idioma / Language">
+          <button type="button" data-lang="es" aria-pressed="true">ES</button>
+          <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+
+      <div class="presentacion">
+        <div class="avatar" aria-hidden="true">AV</div>
+        <div>
+          <h1>Alex Verboonen Cabrera</h1>
+          <p class="titular">Systems Engineer · DevOps · Google Cloud Architect</p>
+          <p class="pitch es">Más de 10 años manteniendo en pie infraestructura crítica para empresas globales. Hoy combino Linux, Kubernetes y cloud con datos e inteligencia artificial, que estudio en la Maestría en IA Aplicada del Tec de Monterrey.</p>
+          <p class="pitch en">10+ years keeping critical infrastructure running for global companies. Today I combine Linux, Kubernetes and cloud with data and AI, which I'm studying in the Master's in Applied AI at Tecnológico de Monterrey.</p>
+
+          <div class="acciones">
+            <a class="boton principal es" href="/cv/es/">Ver mi CV</a>
+            <a class="boton principal en" href="/cv/en/">View my résumé</a>
+            <a class="boton secundario es" href="#laboratorios">Laboratorios</a>
+            <a class="boton secundario en" href="#laboratorios">Labs</a>
+            <a class="boton secundario" href="https://www.linkedin.com/in/alex-verboonen/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="contenedor">
+
+    <!-- ===== DATOS CLAVE ===== -->
+    <div class="datos">
+      <div class="dato"><strong>10+</strong><span class="es">años en infraestructura</span><span class="en">years in infrastructure</span></div>
+      <div class="dato"><strong>GCP</strong><span>Professional Cloud Architect</span></div>
+      <div class="dato"><strong>Terraform</strong><span>HashiCorp Associate</span></div>
+      <div class="dato"><strong class="es">Maestría IA</strong><strong class="en">Master's in AI</strong><span>Tec de Monterrey</span></div>
+    </div>
+
+    <!-- ===== LABORATORIOS ===== -->
+    <section id="laboratorios">
+      <h2 class="es">Laboratorios</h2>
+      <h2 class="en">Labs</h2>
+      <p class="intro es">Proyectos reales y de la maestría, documentados de principio a fin: el problema, cómo lo resolví y qué resultó.</p>
+      <p class="intro en">Real-world and master's projects, documented end to end: the problem, how I solved it and what came out of it.</p>
+
+      <div class="labs">
+        <a class="lab" href="/cv/es/labs/trees-in-space.html" data-en="/cv/en/labs/trees-in-space.html">
+          <span class="categoria es">Automatización</span><span class="categoria en">Automation</span>
+          <h3>Trees in Space · TreeBot</h3>
+          <p class="es">Bot y portal web para una comunidad de Halo Infinite: detecta récords en partidas reales y publica estadísticas por jugador.</p>
+          <p class="en">Bot and web portal for a Halo Infinite community: detects records in real matches and publishes per-player stats.</p>
+          <p class="metrica es">v1.0 en producción · automatizado con GitHub Actions</p>
+          <p class="metrica en">v1.0 in production · automated with GitHub Actions</p>
+          <div class="tec"><span>Python</span><span>Flask</span><span>GitHub Actions</span><span>Render</span></div>
+          <span class="ver es">Ver laboratorio →</span><span class="ver en">View lab →</span>
+        </a>
+
+        <a class="lab" href="/cv/es/labs/snakemagic.html" data-en="/cv/en/labs/snakemagic.html">
+          <span class="categoria es">Ciberseguridad</span><span class="categoria en">Security</span>
+          <h3 class="es">snakemagic.com · rescate de un WordPress hackeado</h3>
+          <h3 class="en">snakemagic.com · rescuing a hacked WordPress</h3>
+          <p class="es">Auditoría del sitio comprometido, migración a sitio estático en GitHub Pages, cambio de DNS y cierre del hosting.</p>
+          <p class="en">Audit of the compromised site, migration to a static site on GitHub Pages, DNS cutover and hosting shutdown.</p>
+          <p class="metrica es">Reembolso del 100% de la renovación</p>
+          <p class="metrica en">100% refund of the hosting renewal</p>
+          <div class="tec"><span>DNS</span><span>GitHub Pages</span><span>WordPress</span></div>
+          <span class="ver es">Ver laboratorio →</span><span class="ver en">View lab →</span>
+        </a>
+
+        <a class="lab" href="/cv/es/labs/customer-churn.html" data-en="/cv/en/labs/customer-churn.html">
+          <span class="categoria">Machine Learning</span>
+          <h3 class="es">Predicción de abandono de clientes</h3>
+          <h3 class="en">Customer churn prediction</h3>
+          <p class="es">Comparación de cinco modelos en SAS Viya para anticipar qué clientes abandonarán la empresa.</p>
+          <p class="en">Five models compared in SAS Viya to anticipate which customers will churn.</p>
+          <p class="metrica es">Gradient Boosting: 91.1% de exactitud · ROC AUC 0.919</p>
+          <p class="metrica en">Gradient Boosting: 91.1% accuracy · 0.919 ROC AUC</p>
+          <div class="tec"><span>SAS Viya</span><span>Gradient Boosting</span><span>CRISP-DM</span></div>
+          <span class="ver es">Ver laboratorio →</span><span class="ver en">View lab →</span>
+        </a>
+
+        <a class="lab" href="/cv/es/labs/data-storytelling.html" data-en="/cv/en/labs/data-storytelling.html">
+          <span class="categoria">Data Storytelling</span>
+          <h3 class="es">De los datos a la estrategia</h3>
+          <h3 class="en">From data to strategy</h3>
+          <p class="es">Análisis de ventas para Numismática México: estacionalidad, concentración de ingresos y recomendaciones comerciales.</p>
+          <p class="en">Sales analysis for Numismática México: seasonality, revenue concentration and business recommendations.</p>
+          <div class="tec"><span class="es">Análisis de ventas</span><span class="es">Visualización</span><span class="en">Sales analytics</span><span class="en">Data visualization</span></div>
+          <span class="ver es">Ver laboratorio →</span><span class="ver en">View lab →</span>
+        </a>
+
+        <a class="lab" href="/cv/es/labs/ciencia-datos.html" data-en="/cv/en/labs/ciencia-datos.html">
+          <span class="categoria">Data Science</span>
+          <h3 class="es">Del dato crudo al modelo</h3>
+          <h3 class="en">From raw data to model</h3>
+          <p class="es">Ocho laboratorios en Python que recorren el ciclo completo: pandas, SQL, EDA, preprocesamiento, PCA y regresión.</p>
+          <p class="en">Eight Python labs covering the full cycle: pandas, SQL, EDA, preprocessing, PCA and regression.</p>
+          <p class="metrica es">R² de 0.963 · 97.4% de exactitud</p>
+          <p class="metrica en">R² of 0.963 · 97.4% accuracy</p>
+          <div class="tec"><span>Python</span><span>pandas</span><span>SQL</span><span>PCA</span></div>
+          <span class="ver es">Ver laboratorio →</span><span class="ver en">View lab →</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== LO QUE HAGO ===== -->
+    <section>
+      <h2 class="es">Lo que hago</h2>
+      <h2 class="en">What I do</h2>
+      <div class="areas" style="margin-top:22px">
+        <div class="area">
+          <h3 class="es">Infraestructura y operación</h3><h3 class="en">Infrastructure & operations</h3>
+          <p class="es">Linux (RHEL, AIX), soporte L2 24/7 para plataformas críticas y monitoreo con Zabbix, BigPanda y Elasticsearch.</p>
+          <p class="en">Linux (RHEL, AIX), 24/7 L2 support for critical platforms and monitoring with Zabbix, BigPanda and Elasticsearch.</p>
+        </div>
+        <div class="area">
+          <h3>DevOps & Cloud</h3>
+          <p class="es">Kubernetes, Docker, Terraform, Ansible y pipelines CI/CD con Jenkins, sobre GCP, Azure y AWS.</p>
+          <p class="en">Kubernetes, Docker, Terraform, Ansible and CI/CD pipelines with Jenkins, on GCP, Azure and AWS.</p>
+        </div>
+        <div class="area">
+          <h3 class="es">Datos e IA</h3><h3 class="en">Data & AI</h3>
+          <p class="es">Machine Learning, análisis y visualización de datos con Python y SAS Viya, aplicados a problemas de negocio.</p>
+          <p class="en">Machine learning, data analysis and visualization with Python and SAS Viya, applied to business problems.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== PIE ===== -->
+  <footer>
+    <div class="contenedor">
+      <div><strong>Alex Verboonen Cabrera</strong> · Querétaro, México</div>
+      <nav>
+        <a class="es" href="/cv/es/">CV</a>
+        <a class="en" href="/cv/en/">Résumé</a>
+        <a href="https://www.linkedin.com/in/alex-verboonen/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/AlexVerboo" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // Idioma: elección guardada → idioma del navegador → español
+    (function () {
+      var guardado = null;
+      try { guardado = localStorage.getItem('idioma'); } catch (e) {}
+      var navegador = (navigator.language || 'es').slice(0, 2) === 'es' ? 'es' : 'en';
+      aplicar(guardado === 'es' || guardado === 'en' ? guardado : navegador);
+
+      document.querySelectorAll('.idiomas button').forEach(function (b) {
+        b.addEventListener('click', function () {
+          aplicar(b.dataset.lang);
+          try { localStorage.setItem('idioma', b.dataset.lang); } catch (e) {}
+        });
+      });
+
+      function aplicar(lang) {
+        document.documentElement.lang = lang;
+        document.querySelectorAll('.idiomas button').forEach(function (b) {
+          b.setAttribute('aria-pressed', b.dataset.lang === lang);
+        });
+        // Los enlaces de laboratorios apuntan a la versión del idioma activo
+        document.querySelectorAll('.lab').forEach(function (a) {
+          if (!a.dataset.es) a.dataset.es = a.getAttribute('href');
+          a.setAttribute('href', lang === 'en' ? a.dataset.en : a.dataset.es);
+        });
+      }
+    })();
+  </script>
+</body>
 </html>
